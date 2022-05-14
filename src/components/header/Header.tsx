@@ -58,15 +58,15 @@ const Nav = styled.nav`
                 content: '';
                 display: block;
                 height: 5px;
-                background-color: ${colors.white};
+                background-color: ${colors.green};
                 position: absolute;
                 bottom: 0;
                 left: 0;
                 width: 0%;
-                transition: width .1s;
             }
 
             &:hover {
+                color: ${colors.green};
                 &:after{
 
                     width: 100%;
