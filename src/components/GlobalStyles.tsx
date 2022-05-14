@@ -18,6 +18,11 @@ const GlobalStyles = createGlobalStyle`
         outline: none;
     }
 
+    a{
+        color: inherit;
+        text-decoration: none;
+    }
+
 `
 
 export default GlobalStyles
