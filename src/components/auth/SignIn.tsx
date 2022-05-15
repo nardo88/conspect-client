@@ -79,7 +79,7 @@ const SignIn = ({ login }: SignInPropsType) => {
 
                     }}
                     placeholder="Password"
-
+                    label="Password"
                 />
             </FormItem>
 

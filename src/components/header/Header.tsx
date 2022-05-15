@@ -2,9 +2,12 @@ import styled from 'styled-components'
 import { Container } from '../ui/components'
 import { Link } from 'react-router-dom'
 import colors from '../ui/colors'
+import { useContext } from 'react'
+import { AuthContext } from '../../context/AuthContext'
+import ProfileMenu from '../profile/ProfileMenu'
 
 const Header = () => {
-
+    const { isAuthenticated } = useContext(AuthContext)
     return (
         <HeaderWrapper>
             <Container>
@@ -14,17 +17,22 @@ const Header = () => {
                             <img src="/assets/img/logoMobile.svg" alt="" />
                         </Link>
                     </Logo>
+                    {isAuthenticated ?
 
-                    <Nav>
-                        <ul>
-                            <li>
-                                <Link to="signin">Войти</Link>
-                            </li>
-                            <li>
-                                <Link to="signup">Зарегистрироваться</Link>
-                            </li>
-                        </ul>
-                    </Nav>
+                        <ProfileMenu />
+                        :
+                        <Nav>
+                            <ul>
+                                <li>
+                                    <Link to="signin">Войти</Link>
+                                </li>
+                                <li>
+                                    <Link to="signup">Зарегистрироваться</Link>
+                                </li>
+                            </ul>
+                        </Nav>
+                    }
+
                 </HeaderContainer>
             </Container>
         </HeaderWrapper>
@@ -35,12 +43,13 @@ export default Header
 
 const HeaderWrapper = styled.header`
     background-color: ${colors.brown};
-    
 `
 const HeaderContainer = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
+    height: 59px;
+
 `
 const Logo = styled.div``
 
@@ -77,7 +86,7 @@ const Nav = styled.nav`
             a{
                 display: inline-block;
                 min-height: 100%;
-            padding: 20px 0;
+                padding: 20px 0;
 
             }
         }
