@@ -23,6 +23,21 @@ const GlobalStyles = createGlobalStyle`
         text-decoration: none;
     }
 
+    .h20{
+        height: 20px;
+    }
+
+    @keyframes fadeIn {
+        0% {
+            opacity: 0;
+            transform: translateY(-50%)
+        }
+
+        100% {
+            opacity: 1;
+            transform: translateY(0)
+        }
+    }
 `
 
 export default GlobalStyles
