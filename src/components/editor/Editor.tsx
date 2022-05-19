@@ -23,7 +23,7 @@ const Editor: React.FC = () => {
     <div>
       <div className="container">
         <Wrapper className="df">
-          <div>
+          <TabTop>
             <ul>
               <TabItem
                 active={currentTab === "settings"}
@@ -38,10 +38,10 @@ const Editor: React.FC = () => {
                 Содержимое
               </TabItem>
             </ul>
-          </div>
-          <div>
-              {currentTab === 'settings' && <Settings value={acticle} setValue={setArticle} />}
-          </div>
+          </TabTop>
+          <TabContent>
+              {currentTab === 'settings' && <Settings acticle={acticle} setArticle={setArticle} />}
+          </TabContent>
         </Wrapper>
       </div>
     </div>
@@ -59,4 +59,17 @@ const TabItem = styled.li<{ active?: boolean }>`
   border: 1px solid ${colors.grey};
   cursor: pointer;
   background-color: ${({ active }) => (active ? colors.grey : colors.white)};
+`
+
+const TabTop = styled.div`
+    flex-shrink: 0;
+`
+
+const TabContent = styled.div`
+    margin-left: 20px;
+    box-shadow: 0 0 5px 5px rgba(0,0,0,0.3);
+    border-radius: 4px;
+    flex-grow: 1;
+    padding: 30px;
+
 `
