@@ -4,3 +4,4 @@ export type AuthType = {
     token: string | null
     userId: string | null
 }
+

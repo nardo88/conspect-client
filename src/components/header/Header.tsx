@@ -5,6 +5,7 @@ import colors from '../ui/colors'
 import { useContext } from 'react'
 import { AuthContext } from '../../context/AuthContext'
 import ProfileMenu from '../profile/ProfileMenu'
+import breackpoints from '../ui/breackpoints'
 
 const Header = () => {
     const { isAuthenticated } = useContext(AuthContext)
@@ -87,6 +88,11 @@ const Nav = styled.nav`
                 display: inline-block;
                 min-height: 100%;
                 padding: 20px 0;
+                font-size: 16px;
+
+                ${breackpoints.md}{
+                    font-size: 14px;
+                }
 
             }
         }

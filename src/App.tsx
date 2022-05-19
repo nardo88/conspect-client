@@ -7,6 +7,8 @@ import NotFoundPage from "./components/notFoundPage/NotFoundPage";
 import { useAuth } from "./hooks/auth.hook";
 import { AuthContext } from "./context/AuthContext";
 import Articles from "./components/articles/Articles";
+import ArticleList from "./components/articles/ArticleList";
+import Editor from "./components/editor/Editor";
 
 function App() {
   const {token, userId, login, logout} = useAuth() as any
@@ -22,6 +24,8 @@ function App() {
           isAuthenticated ?
           <Routes>
             <Route path="/" element={<Articles />} />
+            <Route path="/articles" element={<ArticleList />} />
+            <Route path="/editor" element={<Editor />} />
             <Route path="*" element={<Navigate replace to="/" />} />
 
           </Routes>

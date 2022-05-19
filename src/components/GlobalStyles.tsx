@@ -1,4 +1,5 @@
-import { createGlobalStyle } from 'styled-components'
+import { createGlobalStyle } from "styled-components"
+import breackpoints from "./ui/breackpoints"
 
 const GlobalStyles = createGlobalStyle`
    
@@ -37,6 +38,25 @@ const GlobalStyles = createGlobalStyle`
             opacity: 1;
             transform: translateY(0)
         }
+    }
+
+    .container{
+        width: 100%;
+        margin: 0 auto;
+        padding: 0 30px;
+        
+        ${breackpoints.md}{
+            padding: 0 20px;
+
+        }
+    }
+
+    .df{
+        display: flex;
+    }
+
+    .aic{
+        align-items: center;
     }
 `
 

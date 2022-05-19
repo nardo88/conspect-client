@@ -1,8 +1,13 @@
 import styled from 'styled-components'
+import breackpoints from './breackpoints'
 
 export const Container = styled.div`
     width: 100%;
-    max-width: 1150px;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0 30px;
+    
+    ${breackpoints.md}{
+        padding: 0 20px;
+
+    }
 `
