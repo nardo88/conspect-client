@@ -51,12 +51,28 @@ const GlobalStyles = createGlobalStyle`
         }
     }
 
+    .mt20{
+        margin-top: 20px;
+    }
+
     .df{
         display: flex;
     }
 
+    .jcsb{
+        justify-content: space-between;
+    }
+
     .aic{
         align-items: center;
+    }
+
+    .posr{
+        position: relative;
+    }
+
+    .posa{
+
     }
 `
 

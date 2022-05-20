@@ -1,8 +1,9 @@
-import { useState } from "react"
-import styled from "styled-components"
-import { ArticleType } from "../../types/articles"
-import colors from "../ui/colors"
-import Settings from "./Settings"
+import { useState } from 'react'
+import styled from 'styled-components'
+import { ArticleType } from '../../types/articles'
+import colors from '../ui/colors'
+import Body from './Body'
+import Settings from './Settings'
 
 /**
  *
@@ -11,13 +12,13 @@ import Settings from "./Settings"
 
 const Editor: React.FC = () => {
   const defaultArticle = {
-    category: "",
-    theme: "",
-    title: "",
+    category: '',
+    theme: '',
+    title: '',
     body: [],
   }
 
-  const [currentTab, setCurrentTab] = useState<string>("settings")
+  const [currentTab, setCurrentTab] = useState<string>('settings')
   const [acticle, setArticle] = useState<ArticleType>(defaultArticle)
   return (
     <div>
@@ -26,21 +27,26 @@ const Editor: React.FC = () => {
           <TabTop>
             <ul>
               <TabItem
-                active={currentTab === "settings"}
-                onClick={() => setCurrentTab("settings")}
+                active={currentTab === 'settings'}
+                onClick={() => setCurrentTab('settings')}
               >
                 Настройки
               </TabItem>
               <TabItem
-                active={currentTab === "content"}
-                onClick={() => setCurrentTab("content")}
+                active={currentTab === 'content'}
+                onClick={() => setCurrentTab('content')}
               >
                 Содержимое
               </TabItem>
             </ul>
           </TabTop>
           <TabContent>
-              {currentTab === 'settings' && <Settings acticle={acticle} setArticle={setArticle} />}
+            {currentTab === 'settings' && (
+              <Settings acticle={acticle} setArticle={setArticle} />
+            )}
+            {currentTab === 'content' && (
+              <Body acticle={acticle} setArticle={setArticle} />
+            )}
           </TabContent>
         </Wrapper>
       </div>
@@ -62,14 +68,14 @@ const TabItem = styled.li<{ active?: boolean }>`
 `
 
 const TabTop = styled.div`
-    flex-shrink: 0;
+  flex-shrink: 0;
 `
 
 const TabContent = styled.div`
-    margin-left: 20px;
-    box-shadow: 0 0 5px 5px rgba(0,0,0,0.3);
-    border-radius: 4px;
-    flex-grow: 1;
-    padding: 30px;
-
+  margin-left: 20px;
+  box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
+  flex-grow: 1;
+  padding: 30px;
+  min-height: 60vh;
 `

@@ -44,7 +44,7 @@ const ProfileMenu = () => {
               <Link to={"/editor"}>Создать конспект</Link>
             </li>
             <li onClick={() => logout()}>
-              <a href="">Выйти</a>
+              <a href="#!">Выйти</a>
             </li>
           </ul>
         </Menu>
@@ -73,6 +73,7 @@ const Menu = styled.div`
   top: 100%;
   right: -30px;
   width: 300px;
+  z-index: 1000;
 
   ${breackpoints.md}{
       right: -20px;
