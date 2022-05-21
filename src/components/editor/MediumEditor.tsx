@@ -5,13 +5,16 @@ import 'medium-editor/dist/css/themes/default.css'
 import { useEffect } from 'react'
 import styled from 'styled-components'
 import colors from '../ui/colors'
+import { variantsTranslate } from '../ui/settings'
 
 type EditorProps = {
+    type: 'text' | 'image' | 'markdown' | 'video' | 'file'
     value: string
     onChange: (value: string) => void
+    remove: () => void
 }
 
-const MediumEditor:React.FC<EditorProps> = ({value, onChange}) => {
+const MediumEditor: React.FC<EditorProps> = ({ value, onChange, type, remove }) => {
 
     useEffect(() => {
         require('medium-editor/dist/css/medium-editor.css')
@@ -20,13 +23,13 @@ const MediumEditor:React.FC<EditorProps> = ({value, onChange}) => {
 
     return (
         <EditorWrapper>
+            <span>{variantsTranslate[type]}</span>
             <ControlWrapper>
-                <button className='mr20'>Удалить</button>
+                <button onClick={remove} className='mr20'>Удалить</button>
             </ControlWrapper>
             <Editor
                 text={value}
                 onChange={(v: any) => onChange(v)}
-                //   required={p.optional !== true}
                 options={
                     {
                         toolbar: {
@@ -53,19 +56,13 @@ const MediumEditor:React.FC<EditorProps> = ({value, onChange}) => {
 export default MediumEditor
 
 const EditorWrapper = styled.div`
+  position: relative;
   border: 1px solid ${colors.grey};
   width: 100%;
   padding: 16px;
   margin-bottom: 20px;
-  
-  font-size: var(--fb-size-small);
   background-color: transparent;
   border-radius: 4px;
-  /* outline: none; */
-
-  :focus {
-    border: var(--fb-input-outline);
-  }
 
   div {
     outline: none;
@@ -89,6 +86,18 @@ const EditorWrapper = styled.div`
       text-decoration: underline;
       color: inherit;
   }
+
+  & > span {
+        background-color: ${colors.white};
+        color: ${colors.grey};
+        padding: 0 5px;
+        position: absolute;
+        top: 0;
+        left: 8px;
+        transform: translateY(-50%);
+        font-size: 12px;
+        line-height: 1;
+    }
 
     `
 

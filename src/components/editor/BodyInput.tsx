@@ -4,6 +4,7 @@ import colors from '../ui/colors'
 import MarkDownEditor from './MarkDownEditor'
 import MediumEditor from './MediumEditor'
 import { ArticleType } from '../../types/articles'
+import AddFile from './AddFile'
 
 
 type BodyInputProps = {
@@ -14,6 +15,13 @@ type BodyInputProps = {
 const BodyInput: React.FC<BodyInputProps> = ({ data, setData }) => {
   console.log(data)
 
+  const deleteItem = (index: number) => {
+    return function(){
+      const newBody = data.body.filter((_, i) => i !== index)
+      setData({...data, body: newBody})
+    }
+  }
+
   if (!data.body.length) {
     return null
   }
@@ -23,26 +31,44 @@ const BodyInput: React.FC<BodyInputProps> = ({ data, setData }) => {
         <div key={i}>
           {
             item.type === 'markdown' &&
-            <MarkDownEditor 
-              value={item.value} 
-              onChange={(text:string) => {
-                const newItem = {type: item.type, value: text}
+            <MarkDownEditor
+              type={item.type}
+              value={item.value}
+              remove={deleteItem(i)}
+              onChange={(text: string) => {
+                const newItem = { type: item.type, value: text }
                 const newBody = [...data.body]
                 newBody[i] = newItem
-                setData({...data, body: newBody})
-              }} 
+                setData({ ...data, body: newBody })
+              }}
             />
           }
           {
             item.type === 'text' &&
-            <MediumEditor 
-              value={item.value} 
-              onChange={(text:string) => {
-                const newItem = {type: item.type, value: text}
+            <MediumEditor
+              type={item.type}
+              value={item.value}
+              remove={deleteItem(i)}
+              onChange={(text: string) => {
+                const newItem = { type: item.type, value: text }
                 const newBody = [...data.body]
                 newBody[i] = newItem
-                setData({...data, body: newBody})
-              }} 
+                setData({ ...data, body: newBody })
+              }}
+            />
+          }
+          {
+            (item.type === 'image' || item.type === 'video' || item.type === 'file') &&
+            <AddFile
+              type={item.type}
+              value={item.value}
+              remove={deleteItem(i)}
+              onChange={(text: string) => {
+                const newItem = { type: item.type, value: text }
+                const newBody = [...data.body]
+                newBody[i] = newItem
+                setData({ ...data, body: newBody })
+              }}
             />
           }
         </div>
