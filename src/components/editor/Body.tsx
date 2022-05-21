@@ -36,7 +36,6 @@ const Body: React.FC<SettingsType> = ({ acticle, setArticle }) => {
     }
   }, [])
 
-  console.log(acticle)
   return (
     <BodyWrapper>
       <div className="top df jcsb" >
@@ -57,7 +56,7 @@ const Body: React.FC<SettingsType> = ({ acticle, setArticle }) => {
         <SaveBtn />
       </div>
       <div className="content mt20">
-        <BodyInput data={acticle.body} />
+        <BodyInput data={acticle} setData={setArticle} />
       </div>
     </BodyWrapper>
   )
@@ -84,6 +83,7 @@ const AddBtn = styled.button`
 
 const AddList = styled.div`
   position: absolute;
+  z-index: 50;
   border-radius: 5px;
   left: 0;
   top: 103%;

@@ -27,12 +27,20 @@ export const themes = [
 ]
 
 export const bodyVariants = [
-    {id: 'text', title: 'Текст'},
-    {id: 'image', title: 'Изображение'},
-    {id: 'markdown', title: 'MarkDown'},
-    {id: 'video', title: 'Видео'},
-    {id: 'file', title: 'Файл'},
+  { id: 'text', title: 'Текст' },
+  { id: 'image', title: 'Изображение' },
+  { id: 'markdown', title: 'MarkDown' },
+  { id: 'video', title: 'Видео' },
+  { id: 'file', title: 'Файл' },
 ]
+
+export const variantsTranslate = {
+  text: 'Текст',
+  image: 'Изображение',
+  markdown: 'MarkDown',
+  video: 'Видео',
+  file: 'Файл',
+}
 
 
 
