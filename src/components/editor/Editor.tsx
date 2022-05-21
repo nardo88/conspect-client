@@ -13,7 +13,7 @@ import Settings from './Settings'
 const Editor: React.FC = () => {
   const defaultArticle = {
     category: '',
-    theme: '',
+    subCategory: '',
     title: '',
     body: [],
   }

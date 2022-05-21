@@ -4,7 +4,7 @@ import { ArticleType } from '../../types/articles'
 import { DefaultOptions } from '../../types/default.options'
 import Input from '../ui/Input'
 import Select from '../ui/Select'
-import { categories, themes } from '../ui/settings'
+import { categories, subCategories } from '../ui/settings'
 
 type SettingsType = {
   acticle: ArticleType
@@ -13,15 +13,17 @@ type SettingsType = {
 
 const Settings: React.FC<SettingsType> = ({ acticle, setArticle }) => {
   const [category, setCategory] = useState<null | DefaultOptions>(null)
-  const [theme, setThemes] = useState<null | DefaultOptions>(null)
-  const [title, setTitle] = useState('')
+  const [subCategory, setSubCategory] = useState<null | DefaultOptions>(null)
 
   return (
     <div>
       <FormItem>
         <Select
           value={category}
-          onChange={setCategory}
+          onChange={(value:DefaultOptions) => {
+            setCategory(value)
+            setArticle({...acticle, category: value.id})
+          }}
           options={categories}
           label="Выберите категорию"
         />
@@ -30,16 +32,25 @@ const Settings: React.FC<SettingsType> = ({ acticle, setArticle }) => {
       {category && category?.id !== 'main' && (
         <FormItem>
           <Select
-            value={theme}
-            onChange={setThemes}
-            options={themes}
+            value={subCategory}
+            onChange={(value:DefaultOptions) => {
+              setSubCategory(value)
+              setArticle({...acticle, subCategory: value.id})
+            }}
+            options={subCategories}
             label="Выберите категорию"
           />
         </FormItem>
       )}
 
       <FormItem>
-        <Input value={title} onChange={setTitle} label="Укажите заголовок" />
+        <Input 
+          value={acticle.title} 
+          onChange={(text:string) => {
+            setArticle({...acticle, title:text})
+          }} 
+          label="Укажите заголовок" 
+        />
       </FormItem>
     </div>
   )

@@ -4,7 +4,7 @@ export const categories = [
   { id: 'practice', title: 'Практика' },
 ]
 
-export const themes = [
+export const subCategories = [
   { id: 'react', title: 'React' },
   { id: 'html', title: 'HTML' },
   { id: 'css', title: 'CSS' },

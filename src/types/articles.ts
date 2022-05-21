@@ -5,7 +5,7 @@ export type BodyItem = {
 
 export type ArticleType = {
     category: string
-    theme: string
+    subCategory: string
     title: string
     body: BodyItem[]
   }
