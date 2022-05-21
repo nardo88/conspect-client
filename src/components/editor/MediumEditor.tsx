@@ -17,9 +17,7 @@ const MediumEditor = ({ p }: any) => {
     return (
         <EditorWrapper>
             <ControlWrapper>
-                <button>1</button>
-                <button>1</button>
-                <button>1</button>
+                <button className='mr20'>Удалить</button>
             </ControlWrapper>
             <Editor
                 text={value}
@@ -58,7 +56,7 @@ const EditorWrapper = styled.div`
   
   font-size: var(--fb-size-small);
   background-color: transparent;
-  border-radius: .25rem;
+  border-radius: 4px;
   /* outline: none; */
 
   :focus {

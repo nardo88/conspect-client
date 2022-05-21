@@ -84,6 +84,7 @@ const AddBtn = styled.button`
 
 const AddList = styled.div`
   position: absolute;
+  z-index: 50;
   border-radius: 5px;
   left: 0;
   top: 103%;
