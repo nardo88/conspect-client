@@ -2,12 +2,16 @@
 import Editor from 'react-medium-editor'
 import 'medium-editor/dist/css/medium-editor.css'
 import 'medium-editor/dist/css/themes/default.css'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import styled from 'styled-components'
 import colors from '../ui/colors'
 
-const MediumEditor = ({ p }: any) => {
-    const [value, setValue] = useState('')
+type EditorProps = {
+    value: string
+    onChange: (value: string) => void
+}
+
+const MediumEditor:React.FC<EditorProps> = ({value, onChange}) => {
 
     useEffect(() => {
         require('medium-editor/dist/css/medium-editor.css')
@@ -21,7 +25,7 @@ const MediumEditor = ({ p }: any) => {
             </ControlWrapper>
             <Editor
                 text={value}
-                onChange={(v: any) => setValue(v)}
+                onChange={(v: any) => onChange(v)}
                 //   required={p.optional !== true}
                 options={
                     {

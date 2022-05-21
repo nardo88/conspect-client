@@ -1,18 +1,24 @@
 import MDEditor from '@uiw/react-md-editor'
-import { useState } from 'react'
 import styled from 'styled-components'
 import colors from '../ui/colors'
 
-const MarkDownEditor: React.FC = () => {
-  const [value, setValue] = useState('') as any
+type MerkDownPRops = {
+  value: string
+  onChange: (text:string) => void
+}
+
+const MarkDownEditor: React.FC<MerkDownPRops> = ({value, onChange}) => {
 
   // <MDEditor.Markdown source={value} />
 
   return (
     <EditorWrapper>
+      <BtnWrap>
+        <button>Удалить</button>
+      </BtnWrap>
       <MDEditor
         value={value}
-        onChange={(val) => setValue(val)}
+        onChange={(val:any) => onChange(val)}
         preview="edit"
       />
     </EditorWrapper>
@@ -27,4 +33,8 @@ const EditorWrapper = styled.div`
   padding: 16px;
   border-radius: 4px;
 
+`
+
+const BtnWrap = styled.div`
+  margin-bottom: 15px;
 `
