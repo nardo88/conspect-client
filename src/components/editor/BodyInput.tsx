@@ -2,6 +2,7 @@ import styled from 'styled-components'
 import { BodyItem } from '../../types/articles'
 import colors from '../ui/colors'
 import MarkDownEditor from './MarkDownEditor'
+import MediumEditor from './MediumEditor'
 
 type BodyInputProps = {
   data: BodyItem[]
@@ -16,17 +17,21 @@ const BodyInput: React.FC<BodyInputProps> = ({ data }) => {
   return (
     <Wrapper>
       {data.map((item: BodyItem, i: number) => (
-        <>
+        <div key={i}>
           {
             item.type === 'markdown' &&
             <MarkDownEditor />
-
           }
+          {
+            item.type === 'text' &&
+            <MediumEditor />
+          }
+{/*           
           <div key={i}>
             <div>{item.type}</div>
             <div>{item.value}</div>
-          </div>
-        </>
+          </div> */}
+        </div>
       ))}
     </Wrapper>
   )
