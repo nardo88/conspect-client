@@ -29,12 +29,8 @@ export const themes = [
 export const bodyVariants = [
     {id: 'text', title: 'Текст'},
     {id: 'image', title: 'Изображение'},
-    {id: 'javascript', title: 'JavaScript'},
-    {id: 'html', title: 'HTML'},
-    {id: 'css', title: 'CSS'},
-    {id: 'list', title: 'Список'},
+    {id: 'markdown', title: 'MarkDown'},
     {id: 'video', title: 'Видео'},
-    {id: 'link', title: 'Ссылка'},
     {id: 'file', title: 'Файл'},
 ]
 
