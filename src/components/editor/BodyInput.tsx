@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import { BodyItem } from '../../types/articles'
 import colors from '../ui/colors'
+import MarkDownEditor from './MarkDownEditor'
 
 type BodyInputProps = {
   data: BodyItem[]
@@ -9,16 +10,24 @@ type BodyInputProps = {
 const BodyInput: React.FC<BodyInputProps> = ({ data }) => {
   console.log(data)
 
-  if(!data.length){
+  if (!data.length) {
     return null
   }
   return (
     <Wrapper>
-      {data.map((item:BodyItem) => 
-      <div>
-          <div>{item.type}</div>
-          <div>{item.value}</div>
-      </div>)}
+      {data.map((item: BodyItem, i: number) => (
+        <>
+          {
+            item.type === 'markdown' &&
+            <MarkDownEditor />
+
+          }
+          <div key={i}>
+            <div>{item.type}</div>
+            <div>{item.value}</div>
+          </div>
+        </>
+      ))}
     </Wrapper>
   )
 }
