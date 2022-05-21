@@ -10,23 +10,21 @@ type OptionItem = {
 type SelectProps = {
   label?: string
   options: OptionItem[]
-  value: OptionItem | null | undefined
+  value: OptionItem | null 
   onChange: (value: OptionItem) => void
 }
 
 const Select: React.FC<SelectProps> = ({
   options = [],
-  value,
+  value = null,
   onChange,
   label,
 }) => {
-  const [select, setSelect] = useState<null | OptionItem>(null)
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const ref = useRef<HTMLDivElement>(null)
 
   const selectHandler = (value: OptionItem) => {
     onChange(value)
-    setSelect(value)
     setIsOpen(false)
   }
 
@@ -48,7 +46,7 @@ const Select: React.FC<SelectProps> = ({
       <div>
         {label && <Label>{label}</Label>}
         <SelectTop active={isOpen} onClick={() => setIsOpen(!isOpen)}>
-          {select ? select.title : ''}
+          {value ? value.title : ''}
         </SelectTop>
         {/* <div></div> */}
       </div>
