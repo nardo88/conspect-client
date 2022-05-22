@@ -10,6 +10,7 @@ import { DefaultOptions } from "../../types/default.options"
 import Button from "../ui/Button"
 import dayjs from "dayjs"
 import breackpoints from "../ui/breackpoints"
+import Pagination from "../pagination/Pagination"
 
 
 type Article = {
@@ -21,7 +22,7 @@ type Article = {
 }
 
 const ArticleList: React.FC = () => {
-    const LIMIT = 10
+    const LIMIT = 2
     const [data, setData] = useState<Article[]>()
     const [isLoading, setIsLoading] = useState(false)
     const [currentPage, setCurrentPage] = useState<number>(1)
@@ -46,9 +47,6 @@ const ArticleList: React.FC = () => {
                 setIsLoading(false)
             })
     }, [currentPage])
-
-    console.log('data', data)
-    console.log('total', total)
 
     return (
         <AdminWrapper>
@@ -96,6 +94,15 @@ const ArticleList: React.FC = () => {
                             <p>Нет статей для отображения</p>
                     }
                 </ul>
+                <div className="mt20">
+                    <Pagination 
+                        total={total} 
+                        currentPage={currentPage} 
+                        pageCount={LIMIT} 
+                        limit={5} 
+                        onChange={setCurrentPage} 
+                    />
+                </div>
             </DataWrapper>
             {isLoading && <Loader />}
         </AdminWrapper>
