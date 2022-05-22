@@ -55,6 +55,10 @@ const GlobalStyles = createGlobalStyle`
         margin-top: 20px;
     }
 
+    .mb20{
+        margin-bottom: 20px;
+    }
+
     .mr20{
         margin-right: 20px;
     }
