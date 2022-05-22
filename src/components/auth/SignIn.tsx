@@ -55,7 +55,7 @@ const SignIn = ({ login }: SignInPropsType) => {
   }
 
   return (
-    <div style={{padding: '0 20px'}}>
+    <div style={{ padding: '0 20px' }}>
       <Wrapper>
         <h2>Войти</h2>
         <FormItem>

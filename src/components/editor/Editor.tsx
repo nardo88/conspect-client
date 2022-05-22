@@ -18,7 +18,7 @@ const Editor: React.FC = () => {
   }
 
   const [currentTab, setCurrentTab] = useState<string>('settings')
-  const [acticle, setArticle] = useState<ArticleType>(defaultArticle)
+  const [article, setArticle] = useState<ArticleType>(defaultArticle)
 
   return (
     <div>
@@ -42,10 +42,10 @@ const Editor: React.FC = () => {
           </TabTop>
           <TabContent>
             {currentTab === 'settings' && (
-              <Settings acticle={acticle} setArticle={setArticle} />
+              <Settings article={article} setArticle={setArticle} />
             )}
             {currentTab === 'content' && (
-              <Body acticle={acticle} setArticle={setArticle} />
+              <Body article={article} setArticle={setArticle} />
             )}
           </TabContent>
         </Wrapper>

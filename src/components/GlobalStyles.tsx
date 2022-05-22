@@ -67,6 +67,10 @@ const GlobalStyles = createGlobalStyle`
         justify-content: space-between;
     }
 
+    .jcfe{
+        justify-content: flex-end;
+    }
+
     .aic{
         align-items: center;
     }

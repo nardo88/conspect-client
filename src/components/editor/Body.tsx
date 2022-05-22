@@ -5,21 +5,28 @@ import { DefaultOptions } from '../../types/default.options'
 import colors from '../ui/colors'
 import { bodyVariants } from '../ui/settings'
 import BodyInput from './BodyInput'
+import Loader from "../loader/Loader"
+import api from '../../hooks/axios.hook'
+import { useContext } from 'react'
+import { AuthContext } from '../../context/AuthContext'
+
 
 type SettingsType = {
-  acticle: ArticleType
+  article: ArticleType
   setArticle: (value: ArticleType) => void
 }
 
-const Body: React.FC<SettingsType> = ({ acticle, setArticle }) => {
-  const [isOpen, setIsOpen] = useState(false)
+const Body: React.FC<SettingsType> = ({ article, setArticle }) => {
+  const [isOpen, setIsOpen] = useState<boolean>(false)
+  const [isLoading, setIsLoading] = useState<boolean>(false)
   const ref = useRef<HTMLDivElement>(null)
+  const { userId } = useContext(AuthContext)
 
   const addBlock = (type: string) => {
     setIsOpen(false)
     setArticle({
-      ...acticle,
-      body: [...acticle.body, { type, value: '' }],
+      ...article,
+      body: [...article.body, { type, value: '' }],
     })
   }
 
@@ -36,9 +43,41 @@ const Body: React.FC<SettingsType> = ({ acticle, setArticle }) => {
     }
   }, [])
 
+  const createArticle = async () => {
+    if (!article.title || !article.category) {
+      return alert('Заполните все поля!')
+    }
+
+    if(!article.body.length){
+      return alert('Пустую стратью сохранить нельзя!')
+    }
+
+    setIsLoading(true)
+    await api.post('/article', {
+      userId,
+      ...article
+    })
+      .then((res) => {
+        setIsLoading(false)
+        if(res.status === 200){
+          alert('Статья успешно сохранена')
+        }
+      })
+      .catch((error: Error) => {
+        console.log(error)
+      })
+      .finally(() => setIsLoading(false))
+  }
+
   return (
     <BodyWrapper>
-      <div className="top df jcsb" >
+      <div className="top df jcfe" >
+        <SaveBtn onClick={createArticle} />
+      </div>
+      <div className="content mt20">
+        <BodyInput data={article} setData={setArticle} />
+      </div>
+      <div className='df mt20'>
         <AddWrap ref={ref}>
           <AddBtn onClick={() => setIsOpen(!isOpen)} />
           {isOpen && (
@@ -53,11 +92,8 @@ const Body: React.FC<SettingsType> = ({ acticle, setArticle }) => {
             </AddList>
           )}
         </AddWrap>
-        <SaveBtn />
       </div>
-      <div className="content mt20">
-        <BodyInput data={acticle} setData={setArticle} />
-      </div>
+      {isLoading && <Loader />}
     </BodyWrapper>
   )
 }
@@ -72,8 +108,8 @@ const AddWrap = styled.div`
 `
 
 const AddBtn = styled.button`
-  width: 40px;
-  height: 40px;
+  width: 30px;
+  height: 30px;
   border: none;
   background-image: url('/assets/img/add.svg');
   background-color: transparent;
@@ -106,8 +142,8 @@ const AddList = styled.div`
 `
 
 const SaveBtn = styled.button`
-     width: 40px;
-  height: 40px;
+     width: 30px;
+  height: 30px;
   border: none;
   background-image: url('/assets/img/save.svg');
   background-color: transparent;

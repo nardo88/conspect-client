@@ -7,19 +7,19 @@ import Select from '../ui/Select'
 import { categories } from '../ui/settings'
 
 type SettingsType = {
-  acticle: ArticleType
+  article: ArticleType
   setArticle: (value: ArticleType) => void
 }
 
-const Settings: React.FC<SettingsType> = ({ acticle, setArticle }) => {
+const Settings: React.FC<SettingsType> = ({ article, setArticle }) => {
   const [category, setCategory] = useState<null | DefaultOptions>(null)
 
   useEffect(() => {
-    if (acticle.category) {
-      const cat = categories.find((item: DefaultOptions) => item.id === acticle.category)
+    if (article.category) {
+      const cat = categories.find((item: DefaultOptions) => item.id === article.category)
       setCategory(cat || null)
     }
-  }, [acticle])
+  }, [article])
 
   return (
     <div>
@@ -28,7 +28,7 @@ const Settings: React.FC<SettingsType> = ({ acticle, setArticle }) => {
           value={category}
           onChange={(value: DefaultOptions) => {
             setCategory(value)
-            setArticle({ ...acticle, category: value.id })
+            setArticle({ ...article, category: value.id })
           }}
           options={categories}
           label="Выберите категорию"
@@ -37,9 +37,9 @@ const Settings: React.FC<SettingsType> = ({ acticle, setArticle }) => {
 
       <FormItem>
         <Input
-          value={acticle.title}
+          value={article.title}
           onChange={(text: string) => {
-            setArticle({ ...acticle, title: text })
+            setArticle({ ...article, title: text })
           }}
           label="Укажите заголовок"
         />
