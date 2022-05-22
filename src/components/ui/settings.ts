@@ -1,10 +1,5 @@
 export const categories = [
-  { id: 'main', title: 'Общее' },
-  { id: 'teory', title: 'Теория' },
-  { id: 'practice', title: 'Практика' },
-]
-
-export const subCategories = [
+  { id: 'any', title: 'Разное' },
   { id: 'react', title: 'React' },
   { id: 'html', title: 'HTML' },
   { id: 'css', title: 'CSS' },

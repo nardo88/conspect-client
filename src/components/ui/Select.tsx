@@ -10,7 +10,7 @@ type OptionItem = {
 type SelectProps = {
   label?: string
   options: OptionItem[]
-  value: OptionItem | null 
+  value: OptionItem | null
   onChange: (value: OptionItem) => void
 }
 
@@ -98,6 +98,23 @@ const DropDown = styled.div`
   right: 0;
   background-color: ${colors.white};
   border: 1px solid ${colors.grey};
+  max-height: 300px;
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  &::-webkit-scrollbar-track{
+    border-radius: 10px;
+    background-color:  ${colors.lightGrey};
+  }
+
+  &::-webkit-scrollbar{
+      width: 5px;
+      background: transparent;
+  }
+  &::-webkit-scrollbar-thumb{
+      border-radius: 10px;
+      background-color: ${colors.grey};
+  }
 
   & > ul {
     li {

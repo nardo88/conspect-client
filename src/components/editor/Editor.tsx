@@ -13,13 +13,13 @@ import Settings from './Settings'
 const Editor: React.FC = () => {
   const defaultArticle = {
     category: '',
-    subCategory: '',
     title: '',
     body: [],
   }
 
   const [currentTab, setCurrentTab] = useState<string>('settings')
   const [acticle, setArticle] = useState<ArticleType>(defaultArticle)
+
   return (
     <div>
       <div className="container">
