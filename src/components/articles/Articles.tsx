@@ -1,9 +1,12 @@
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import styled from "styled-components"
+import { ArticleContext } from "../../context/ArticleContext"
+import { useAuth } from "../../hooks/auth.hook"
 import api from "../../hooks/axios.hook"
 import Loader from "../loader/Loader"
 import Burger from "../ui/Burger"
 import colors from "../ui/colors"
+import ArticleBody from "./ArticleBody"
 import Category from "./Category"
 
 type Article = {
@@ -17,10 +20,14 @@ type DataType = {
 }
 
 const Articles: React.FC = () => {
+  const { logout } = useAuth() as any
+  const ref = useRef<HTMLDivElement>(null)
   const [isLoading, setIsLoading] = useState(false)
   const [isOpen, setIsOpen] = useState(false)
   const [data, setData] = useState<DataType[]>([])
   const [currentCategory, setCurrentCategory] = useState('')
+  const [currentArticle, setSurrentArticle] = useState('')
+  const [currentArticleId, setSurrentArticleId] = useState('')
 
   useEffect(() => {
     setIsLoading(true)
@@ -28,31 +35,52 @@ const Articles: React.FC = () => {
       .then(res => {
         setData(res.data);
       })
-      .catch((e) => console.log(e))
+      .catch((e) => {
+        if (e?.response?.data?.message === 'Token expired') {
+          logout()
+        }
+        console.log(e)
+      })
       .finally(() => setIsLoading(false))
+  }, [logout])
+
+  useEffect(() => {
+    const clickHandler = (e: any) => {
+      if (ref.current && !ref.current.contains(e.target)) {
+        setIsOpen(false)
+      }
+    }
+
+    window.addEventListener('click', clickHandler)
+
+    return () => window.removeEventListener('click', clickHandler)
   }, [])
 
   return (
-    <Wrapper>
-      <NavWrapper open={isOpen}>
-        <NavTop>
-          <Burger open={isOpen} onClick={() => setIsOpen(!isOpen)} color={colors.lightGrey} />
-        </NavTop>
-        <NavListWrapper open={isOpen}>
-          <ul>
-            {data.map((item: DataType) =>
-              <Category
-                key={item._id}
-                currentCategory={currentCategory}
-                setCurrentCategory={setCurrentCategory}
-                {...item}
-              />)}
-          </ul>
-        </NavListWrapper>
-      </NavWrapper>
-      <Content></Content>
-      {isLoading && <Loader />}
-    </Wrapper>
+    <ArticleContext.Provider value={{}}>
+      <Wrapper>
+        <NavWrapper open={isOpen} ref={ref}>
+          <NavTop>
+            <Burger open={isOpen} onClick={() => setIsOpen(!isOpen)} color={colors.lightGrey} />
+          </NavTop>
+          <NavListWrapper open={isOpen}>
+            <ul>
+              {data.map((item: DataType) =>
+                <Category
+                  key={item._id}
+                  currentCategory={currentCategory}
+                  setCurrentCategory={setCurrentCategory}
+                  {...item}
+                />)}
+            </ul>
+          </NavListWrapper>
+        </NavWrapper>
+        <Content>
+          <ArticleBody />
+        </Content>
+        {isLoading && <Loader />}
+      </Wrapper>
+    </ArticleContext.Provider>
   )
 }
 
@@ -61,6 +89,7 @@ export default Articles
 const Wrapper = styled.div`
   position: relative;
   height: calc(100vh - 59px);
+  padding-left: 40px;
 `
 const NavWrapper = styled.div<{ open: boolean }>`
   position: absolute;

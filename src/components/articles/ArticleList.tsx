@@ -22,7 +22,7 @@ type Article = {
 }
 
 const ArticleList: React.FC = () => {
-    const LIMIT = 2
+    const LIMIT = 10
     const [data, setData] = useState<Article[]>()
     const [isLoading, setIsLoading] = useState(false)
     const [currentPage, setCurrentPage] = useState<number>(1)

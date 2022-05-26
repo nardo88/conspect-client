@@ -1,3 +1,4 @@
+import { useRef } from "react"
 import styled from "styled-components"
 import CategoryArrow from "../icons/CategoryArrow"
 import colors from "../ui/colors"
@@ -11,6 +12,7 @@ type CategoryProps = {
 }
 
 const Category: React.FC<CategoryProps> = ({ _id, titles, currentCategory, setCurrentCategory }) => {
+    const ref = useRef<HTMLDivElement>(null)
 
     const clickHandler = (value: string) => {
         value === currentCategory ? setCurrentCategory('') : setCurrentCategory(value)
@@ -26,11 +28,13 @@ const Category: React.FC<CategoryProps> = ({ _id, titles, currentCategory, setCu
                         <CategoryArrow />
                     </div>
                 </CategoryTitle>
-                <ArticleTitles>
-                    <ul style={{background: colors.lowBrown}}>
-                        {titles.map((item:{ id: string, title: string }) => 
-                        <ArticleTitle key={item.id} {...item} />)}
-                    </ul>
+                <ArticleTitles open={_id === currentCategory} height={ref.current?.offsetHeight}>
+                    <div ref={ref}>
+                        <ul style={{ background: colors.lowBrown }}>
+                            {titles.map((item: { id: string, title: string }) =>
+                                <ArticleTitle key={item.id} {...item} />)}
+                        </ul>
+                    </div>
                 </ArticleTitles>
             </ul>
         </li>
@@ -60,4 +64,8 @@ const CategoryTitle = styled.li`
 
 `
 
-const ArticleTitles = styled.li``
+const ArticleTitles = styled.li<{ open: boolean, height?:number }>`
+    overflow: hidden;
+    transition: .2s;
+    max-height: ${({ open, height }) => (open && height) ? height + 'px' : '0px'};
+`
