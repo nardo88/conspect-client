@@ -108,6 +108,7 @@ const Wrapper = styled.div`
 `
 const NavWrapper = styled.div<{ open: boolean }>`
   position: absolute;
+  z-index: 100;
   top: 0;
   bottom: 0;
   width: 320px;
