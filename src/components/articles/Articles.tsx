@@ -26,8 +26,8 @@ const Articles: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [data, setData] = useState<DataType[]>([])
   const [currentCategory, setCurrentCategory] = useState('')
-  const [currentArticle, setSurrentArticle] = useState('')
-  const [currentArticleId, setSurrentArticleId] = useState('')
+  const [article, setArticle] = useState(null)
+  const [articleId, setArticleId] = useState('')
 
   useEffect(() => {
     setIsLoading(true)
@@ -45,6 +45,17 @@ const Articles: React.FC = () => {
   }, [logout])
 
   useEffect(() => {
+    if (articleId) {
+      setIsLoading(true)
+      api.get(`/article/${articleId}`)
+        .then((response) => setArticle(response.data))
+        .catch((e) => console.log(e))
+        .finally(() => setIsLoading(false))
+
+    }
+  }, [articleId])
+
+  useEffect(() => {
     const clickHandler = (e: any) => {
       if (ref.current && !ref.current.contains(e.target)) {
         setIsOpen(false)
@@ -57,7 +68,7 @@ const Articles: React.FC = () => {
   }, [])
 
   return (
-    <ArticleContext.Provider value={{}}>
+    <ArticleContext.Provider value={{ setArticleId, setIsOpen }}>
       <Wrapper>
         <NavWrapper open={isOpen} ref={ref}>
           <NavTop>
@@ -76,7 +87,11 @@ const Articles: React.FC = () => {
           </NavListWrapper>
         </NavWrapper>
         <Content>
-          <ArticleBody />
+          {article ? 
+          <ArticleBody article={article} />
+            : 
+            <div>Выберите статью</div>
+        }
         </Content>
         {isLoading && <Loader />}
       </Wrapper>
@@ -127,4 +142,22 @@ const NavListWrapper = styled.div<{ open: boolean }>`
       background-color: ${colors.lightBrown};
   }
 `
-const Content = styled.div``
+const Content = styled.div`
+  height: calc(100vh - 59px);
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  &::-webkit-scrollbar-track{
+    border-radius: 10px;
+    background-color:  ${colors.grey};
+  }
+
+  &::-webkit-scrollbar{
+      width: 5px;
+      background: ${colors.grey};
+  }
+  &::-webkit-scrollbar-thumb{
+      border-radius: 10px;
+      background-color: ${colors.lightBrown};
+  }
+`

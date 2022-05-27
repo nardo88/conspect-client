@@ -13,8 +13,6 @@ type BodyInputProps = {
 }
 
 const BodyInput: React.FC<BodyInputProps> = ({ data, setData }) => {
-  console.log(data)
-
   const deleteItem = (index: number) => {
     return function(){
       const newBody = data.body.filter((_, i) => i !== index)

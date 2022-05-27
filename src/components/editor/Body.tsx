@@ -22,7 +22,7 @@ const Body: React.FC<SettingsType> = ({ article, setArticle }) => {
   const ref = useRef<HTMLDivElement>(null)
   const { userId } = useContext(AuthContext)
 
-  const addBlock = (type: string) => {
+  const addBlock = (type: any) => {
     setIsOpen(false)
     setArticle({
       ...article,

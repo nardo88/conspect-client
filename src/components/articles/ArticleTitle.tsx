@@ -1,4 +1,6 @@
+import { useContext } from "react"
 import styled from "styled-components"
+import { ArticleContext } from "../../context/ArticleContext"
 import colors from "../ui/colors"
 
 type ArticleTitleProps = {
@@ -7,8 +9,13 @@ type ArticleTitleProps = {
 }
 
 const ArticleTitle:React.FC<ArticleTitleProps> = ({title, id}) => {
+    const {setArticleId, setIsOpen} = useContext(ArticleContext)
+
     return (
-        <Title>
+        <Title onClick={() => {
+            setArticleId(id)
+            setIsOpen(false)
+            }}>
             <span>{title}</span>
         </Title>
     )

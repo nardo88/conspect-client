@@ -12,7 +12,7 @@ type MerkDownPRops = {
 
 const MarkDownEditor: React.FC<MerkDownPRops> = ({value, onChange, type, remove}) => {
 
-  // <MDEditor.Markdown source={value} />
+  
 
   return (
     <EditorWrapper>
