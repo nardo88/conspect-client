@@ -6,7 +6,6 @@ import {
   uploadBytesResumable,
   getDownloadURL,
 } from 'firebase/storage'
-import { useEffect, useState } from 'react'
 
 const firebaseConfig = {
   apiKey: 'AIzaSyDoys46p0hRHVjWXrvdPxsVBPDisHtkxlA',

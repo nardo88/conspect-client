@@ -14,15 +14,15 @@ type PropsType = {
 }
 
 const AddFile: React.FC<PropsType> = ({ type, onChange, remove, url }) => {
-  const [file, setFile] = useState(null)
-  const [urlImage, setUrlImage] = useState(url)
+  const [file, setFile] = useState(null) as any
+  const [urlFile, setUrlFile] = useState(url)
   const [progress, setProgress] = useState(0)
   const { storage, getDownloadURL, ref, uploadBytesResumable } = useFirebase()
 
   useEffect(() => {
     if (file) {
       const name = dayjs().valueOf()
-      const imagesRef = ref(storage, `/images/${name}.jpg`)
+      const imagesRef = ref(storage, `/${type}/${name}`)
       const uploadTask = uploadBytesResumable(imagesRef, file)
 
       uploadTask.on(
@@ -51,18 +51,15 @@ const AddFile: React.FC<PropsType> = ({ type, onChange, remove, url }) => {
         () => {
           // После того как файл загружен мы получаем ссылку
           getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-            setUrlImage(downloadURL)
+            setUrlFile(downloadURL)
             onChange(downloadURL)
           })
         }
       )
-    }
-    else {
+    } else {
       setProgress(0)
     }
   }, [file])
-
-  console.log(urlImage);
 
   return (
     <Wrapper>
@@ -86,7 +83,13 @@ const AddFile: React.FC<PropsType> = ({ type, onChange, remove, url }) => {
           </Progress>
         </InfoContainer>
       )}
-      {urlImage && <PreviewImage src={urlImage} alt="" />}
+      {type === 'image' && urlFile && <PreviewImage src={urlFile} alt="" />}
+      {type === 'file' && urlFile && (
+        <a download={urlFile} href={urlFile} className="mt20 df" target="_blank" rel="noreferrer">
+          Скачать
+        </a>
+      )}
+      {type === 'video' && urlFile && <Video controls={true} src={urlFile} />}
     </Wrapper>
   )
 }
@@ -158,7 +161,6 @@ const InputWrapper = styled.div`
   background-image: url('/assets/img/upload.svg');
   margin-left: 25px;
 
-
   & > input {
     position: absolute;
     top: 0;
@@ -170,4 +172,9 @@ const InputWrapper = styled.div`
     opacity: 0;
     cursor: pointer;
   }
+`
+const Video = styled.video`
+  margin-top: 15px;
+  max-width: 300px;
+  width: 100%;
 `

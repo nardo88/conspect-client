@@ -3,7 +3,7 @@ import { BodyItem } from '../../types/articles'
 import MarkDownEditor from './MarkDownEditor'
 import MediumEditor from './MediumEditor'
 import { ArticleType } from '../../types/articles'
-import AddImage from './AddImage'
+import AddFile from './AddFile'
 
 
 type BodyInputProps = {
@@ -23,7 +23,6 @@ const BodyInput: React.FC<BodyInputProps> = ({ data, setData }) => {
     return null
   }
 
-  console.log(data)
   return (
     <Wrapper>
       {data.body.map((item: BodyItem, i: number) => (
@@ -57,8 +56,8 @@ const BodyInput: React.FC<BodyInputProps> = ({ data, setData }) => {
             />
           }
           {
-            (item.type === 'image') &&
-            <AddImage
+            (item.type === 'image' || item.type === 'file' || item.type === 'video' ) &&
+            <AddFile
               type={item.type}
               remove={deleteItem(i)}
               url={item.value}
@@ -81,6 +80,3 @@ export default BodyInput
 const Wrapper = styled.div`
 
 `
-
-
-// || item.type === 'video' || item.type === 'file'
