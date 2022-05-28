@@ -5,6 +5,7 @@ import dayjs from 'dayjs'
 import { useEffect, useState } from 'react'
 import useFirebase from '../../hooks/firebase.hook'
 import { RemoveBtn } from '../ui/components'
+import breackpoints from '../ui/breackpoints'
 
 type PropsType = {
   type: 'text' | 'image' | 'markdown' | 'video' | 'file'
@@ -171,6 +172,11 @@ const InputWrapper = styled.div`
     z-index: 10;
     opacity: 0;
     cursor: pointer;
+  }
+
+  ${breackpoints.md}{
+    width: 20px;
+    height: 20px;
   }
 `
 const Video = styled.video`

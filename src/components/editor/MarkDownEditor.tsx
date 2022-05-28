@@ -24,6 +24,7 @@ const MarkDownEditor: React.FC<MerkDownPRops> = ({
         <RemoveBtn onClick={remove} title="Удалить" />
       </BtnWrap>
       <MDEditor
+        hideToolbar={true}
         value={value}
         onChange={(val: any) => onChange(val)}
         preview="edit"

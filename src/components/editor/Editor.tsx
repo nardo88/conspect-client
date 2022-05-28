@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import styled from 'styled-components'
 import { ArticleType } from '../../types/articles'
+import breackpoints from '../ui/breackpoints'
+import Burger from '../ui/Burger'
 import colors from '../ui/colors'
 import Body from './Body'
 import Settings from './Settings'
@@ -17,6 +19,7 @@ const Editor: React.FC = () => {
     body: [],
   }
 
+  const [isOpen, setIsOpen] = useState(false)
   const [currentTab, setCurrentTab] = useState<string>('settings')
   const [article, setArticle] = useState<ArticleType>(defaultArticle)
 
@@ -25,20 +28,33 @@ const Editor: React.FC = () => {
       <div className="container">
         <Wrapper className="df">
           <TabTop>
-            <ul>
+            <BurgerWrapper>
+              <Burger
+                open={isOpen}
+                onClick={() => setIsOpen(!isOpen)}
+                color={colors.brown}
+              />
+            </BurgerWrapper>
+            <TabList open={isOpen}>
               <TabItem
                 active={currentTab === 'settings'}
-                onClick={() => setCurrentTab('settings')}
+                onClick={() => {
+                  setCurrentTab('settings')
+                  setIsOpen(false)
+                }}
               >
                 Настройки
               </TabItem>
               <TabItem
                 active={currentTab === 'content'}
-                onClick={() => setCurrentTab('content')}
+                onClick={() => {
+                  setCurrentTab('content')
+                  setIsOpen(false)
+                }}
               >
                 Содержимое
               </TabItem>
-            </ul>
+            </TabList>
           </TabTop>
           <TabContent>
             {currentTab === 'settings' && (
@@ -58,6 +74,23 @@ export default Editor
 
 const Wrapper = styled.div`
   padding: 20px 0;
+
+  ${breackpoints.md} {
+    flex-direction: column;
+  }
+`
+
+const TabList = styled.ul<{ open: boolean }>`
+  position: static;
+  transform: none;
+  ${breackpoints.md} {
+    position: absolute;
+    left: 0;
+    top: 115%;
+    z-index: 200;
+    transform: translateX(${({ open }) => (open ? '0' : '-200%')});
+    transition: 0.2s;
+  }
 `
 
 const TabItem = styled.li<{ active?: boolean }>`
@@ -69,6 +102,11 @@ const TabItem = styled.li<{ active?: boolean }>`
 
 const TabTop = styled.div`
   flex-shrink: 0;
+  position: relative;
+
+  ${breackpoints.md} {
+    margin-bottom: 25px;
+  }
 `
 
 const TabContent = styled.div`
@@ -78,4 +116,17 @@ const TabContent = styled.div`
   flex-grow: 1;
   padding: 30px;
   min-height: 60vh;
+
+  ${breackpoints.md} {
+    margin-left: 0;
+    padding: 10px;
+  }
+`
+
+const BurgerWrapper = styled.div`
+  display: none;
+
+  ${breackpoints.md} {
+    display: block;
+  }
 `
