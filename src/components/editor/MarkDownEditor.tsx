@@ -1,28 +1,31 @@
 import MDEditor from '@uiw/react-md-editor'
 import styled from 'styled-components'
 import colors from '../ui/colors'
+import { RemoveBtn } from '../ui/components'
 import { variantsTranslate } from '../ui/settings'
 
 type MerkDownPRops = {
   value: string
   type: 'text' | 'image' | 'markdown' | 'video' | 'file'
-  onChange: (text:string) => void
+  onChange: (text: string) => void
   remove: () => void
 }
 
-const MarkDownEditor: React.FC<MerkDownPRops> = ({value, onChange, type, remove}) => {
-
-  
-
+const MarkDownEditor: React.FC<MerkDownPRops> = ({
+  value,
+  onChange,
+  type,
+  remove,
+}) => {
   return (
     <EditorWrapper>
       <span>{variantsTranslate[type]}</span>
       <BtnWrap>
-        <button onClick={remove}>Удалить</button>
+        <RemoveBtn onClick={remove} title="Удалить" />
       </BtnWrap>
       <MDEditor
         value={value}
-        onChange={(val:any) => onChange(val)}
+        onChange={(val: any) => onChange(val)}
         preview="edit"
       />
     </EditorWrapper>
@@ -39,16 +42,16 @@ const EditorWrapper = styled.div`
   position: relative;
 
   & > span {
-        background-color: ${colors.white};
-        color: ${colors.grey};
-        padding: 0 5px;
-        position: absolute;
-        top: 0;
-        left: 8px;
-        transform: translateY(-50%);
-        font-size: 12px;
-        line-height: 1;
-    }
+    background-color: ${colors.white};
+    color: ${colors.grey};
+    padding: 0 5px;
+    position: absolute;
+    top: 0;
+    left: 8px;
+    transform: translateY(-50%);
+    font-size: 12px;
+    line-height: 1;
+  }
 `
 
 const BtnWrap = styled.div`

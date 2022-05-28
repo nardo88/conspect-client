@@ -11,6 +11,7 @@ import Button from "../ui/Button"
 import dayjs from "dayjs"
 import breackpoints from "../ui/breackpoints"
 import Pagination from "../pagination/Pagination"
+import { RemoveBtn } from "../ui/components"
 
 
 type Article = {
@@ -222,19 +223,4 @@ const EditBtn = styled.button`
         width: 20px;
         height: 20px;
     }
-`
-
-const RemoveBtn = styled.button`
-    width: 30px;
-    height: 30px;
-    background-image: url('/assets/img/remove.svg');
-    background-color: transparent;
-    outline: none;
-    border: none;
-
-    ${breackpoints.md}{
-        width: 20px;
-        height: 20px;
-    }
-
 `

@@ -13,3 +13,18 @@ export const Container = styled.div`
 
 export const H1 = styled.h1``
 
+export const RemoveBtn = styled.button`
+    width: 30px;
+    height: 30px;
+    background-image: url('/assets/img/remove.svg');
+    background-color: transparent;
+    outline: none;
+    border: none;
+
+    ${breackpoints.md}{
+        width: 20px;
+        height: 20px;
+    }
+
+`
+
