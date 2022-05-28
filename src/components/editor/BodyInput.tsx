@@ -1,6 +1,5 @@
 import styled from 'styled-components'
 import { BodyItem } from '../../types/articles'
-import colors from '../ui/colors'
 import MarkDownEditor from './MarkDownEditor'
 import MediumEditor from './MediumEditor'
 import { ArticleType } from '../../types/articles'
