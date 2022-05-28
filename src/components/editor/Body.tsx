@@ -19,7 +19,9 @@ type SettingsType = {
 const Body: React.FC<SettingsType> = ({ article, setArticle }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [down, setDown] = useState<boolean>(false)
   const ref = useRef<HTMLDivElement>(null)
+  const listRef = useRef<HTMLDivElement>(null)
   const { userId } = useContext(AuthContext)
 
   const addBlock = (type: any) => {
@@ -42,6 +44,12 @@ const Body: React.FC<SettingsType> = ({ article, setArticle }) => {
       window.removeEventListener('click', missClickSelect)
     }
   }, [])
+
+  useEffect(() => {
+    if(listRef.current && ref.current){
+      setDown(window.innerHeight < Number(Math.floor(ref.current?.getBoundingClientRect()?.top) + listRef.current?.offsetHeight));
+    }
+  }, [isOpen])
 
   const createArticle = async () => {
     if (!article.title || !article.category) {
@@ -82,7 +90,7 @@ const Body: React.FC<SettingsType> = ({ article, setArticle }) => {
         <AddWrap ref={ref}>
           <AddBtn onClick={() => setIsOpen(!isOpen)} />
           {isOpen && (
-            <AddList>
+            <AddList ref={listRef} down={down}>
               <ul>
                 {bodyVariants.map((item: DefaultOptions) => (
                   <li key={item.id} onClick={() => addBlock(item.id)}>
@@ -123,13 +131,19 @@ const AddBtn = styled.button`
   }
 `
 
-const AddList = styled.div`
+const AddList = styled.div<{down?: boolean}>`
   position: absolute;
   z-index: 50;
   border-radius: 5px;
   left: 0;
   top: 103%;
+  transition: .1s;
   background-color: ${colors.lightBrown};
+  transform: translateY(${({down}) => down ? '-125%' : '0'});
+
+  ${breackpoints.md}{
+    transform: translateY(${({down}) => down ? '-118%' : '0'});
+  }
 
   & > ul {
     li {
