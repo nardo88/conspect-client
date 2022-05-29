@@ -28,14 +28,14 @@ const AddFile: React.FC<PropsType> = ({ type, onChange, remove, url }) => {
 
       uploadTask.on(
         'state_changed',
-        (snapshot) => {
+        (snapshot: any) => {
           const progress = Math.floor(
             (snapshot.bytesTransferred / snapshot.totalBytes) * 100
           )
           setProgress(progress)
         },
-        (error) => {
-          switch (error.code) {
+        (error: any) => {
+          switch (error?.code) {
             case 'storage/unauthorized':
               console.log(`User doesn't have permission to access the object`)
               break
@@ -51,7 +51,7 @@ const AddFile: React.FC<PropsType> = ({ type, onChange, remove, url }) => {
         },
         () => {
           // После того как файл загружен мы получаем ссылку
-          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL:string) => {
             setUrlFile(downloadURL)
             onChange(downloadURL)
           })
