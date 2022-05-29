@@ -48,6 +48,12 @@ const ArticleList: React.FC = () => {
             })
     }, [currentPage])
 
+    const removeArticle = async (id: string) => {
+        setIsLoading(true)
+        await api.delete(`/article/${id}`)
+        setIsLoading(false)
+    }
+
     return (
         <AdminWrapper>
             <Filters>
@@ -87,7 +93,7 @@ const ArticleList: React.FC = () => {
                                         <EditBtn />
                                     </div>
                                     <div className="btn">
-                                        <RemoveBtn />
+                                        <RemoveBtn onClick={() => removeArticle(item.id)} />
                                     </div>
                                 </ArticleItem>)
                             :
@@ -95,12 +101,12 @@ const ArticleList: React.FC = () => {
                     }
                 </ul>
                 <div className="mt20">
-                    <Pagination 
-                        total={total} 
-                        currentPage={currentPage} 
-                        pageCount={LIMIT} 
-                        limit={5} 
-                        onChange={setCurrentPage} 
+                    <Pagination
+                        total={total}
+                        currentPage={currentPage}
+                        pageCount={LIMIT}
+                        limit={5}
+                        onChange={setCurrentPage}
                     />
                 </div>
             </DataWrapper>
