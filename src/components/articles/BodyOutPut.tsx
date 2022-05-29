@@ -41,6 +41,12 @@ const BodyElem: React.FC<BodyItemProps> = ({ elem }) => {
                 </TextWrapper>
             }
 
+            {elem.type === 'file' &&
+                <TextWrapper>
+                    <a download={elem.value} href={elem.value} target="_blank" rel="noreferrer">Скачать файл</a> 
+                </TextWrapper>
+            }
+
             {elem.type === 'video' &&
                 <TextWrapper>
                     <Video controls={true} src={elem.value} />

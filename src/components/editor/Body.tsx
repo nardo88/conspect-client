@@ -5,11 +5,11 @@ import { DefaultOptions } from '../../types/default.options'
 import colors from '../ui/colors'
 import { bodyVariants } from '../ui/settings'
 import BodyInput from './BodyInput'
-import Loader from "../loader/Loader"
+import Loader from '../loader/Loader'
 import api from '../../hooks/axios.hook'
 import { useContext } from 'react'
 import { AuthContext } from '../../context/AuthContext'
-
+import breackpoints from '../ui/breackpoints'
 
 type SettingsType = {
   article: ArticleType
@@ -19,7 +19,9 @@ type SettingsType = {
 const Body: React.FC<SettingsType> = ({ article, setArticle }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [down, setDown] = useState<boolean>(false)
   const ref = useRef<HTMLDivElement>(null)
+  const listRef = useRef<HTMLDivElement>(null)
   const { userId } = useContext(AuthContext)
 
   const addBlock = (type: any) => {
@@ -43,23 +45,30 @@ const Body: React.FC<SettingsType> = ({ article, setArticle }) => {
     }
   }, [])
 
+  useEffect(() => {
+    if(listRef.current && ref.current){
+      setDown(window.innerHeight < Number(Math.floor(ref.current?.getBoundingClientRect()?.top) + listRef.current?.offsetHeight));
+    }
+  }, [isOpen])
+
   const createArticle = async () => {
     if (!article.title || !article.category) {
       return alert('Заполните все поля!')
     }
 
-    if(!article.body.length){
+    if (!article.body.length) {
       return alert('Пустую стратью сохранить нельзя!')
     }
 
     setIsLoading(true)
-    await api.post('/article', {
-      userId,
-      ...article
-    })
+    await api
+      .post('/article', {
+        userId,
+        ...article,
+      })
       .then((res) => {
         setIsLoading(false)
-        if(res.status === 200){
+        if (res.status === 200) {
           alert('Статья успешно сохранена')
         }
       })
@@ -71,17 +80,17 @@ const Body: React.FC<SettingsType> = ({ article, setArticle }) => {
 
   return (
     <BodyWrapper>
-      <div className="top df jcfe" >
+      <div className="top df jcfe">
         <SaveBtn onClick={createArticle} />
       </div>
       <div className="content mt20">
         <BodyInput data={article} setData={setArticle} />
       </div>
-      <div className='df mt20'>
+      <div className="df mt20">
         <AddWrap ref={ref}>
           <AddBtn onClick={() => setIsOpen(!isOpen)} />
           {isOpen && (
-            <AddList>
+            <AddList ref={listRef} down={down}>
               <ul>
                 {bodyVariants.map((item: DefaultOptions) => (
                   <li key={item.id} onClick={() => addBlock(item.id)}>
@@ -103,8 +112,8 @@ export default Body
 const BodyWrapper = styled.div``
 
 const AddWrap = styled.div`
-    width: fit-content;
-    position: relative;
+  width: fit-content;
+  position: relative;
 `
 
 const AddBtn = styled.button`
@@ -115,15 +124,26 @@ const AddBtn = styled.button`
   background-color: transparent;
   border-radius: 50%;
   outline: none;
+
+  ${breackpoints.md} {
+    width: 20px;
+    height: 20px;
+  }
 `
 
-const AddList = styled.div`
+const AddList = styled.div<{down?: boolean}>`
   position: absolute;
   z-index: 50;
   border-radius: 5px;
   left: 0;
   top: 103%;
+  transition: .1s;
   background-color: ${colors.lightBrown};
+  transform: translateY(${({down}) => down ? '-125%' : '0'});
+
+  ${breackpoints.md}{
+    transform: translateY(${({down}) => down ? '-118%' : '0'});
+  }
 
   & > ul {
     li {
@@ -142,7 +162,7 @@ const AddList = styled.div`
 `
 
 const SaveBtn = styled.button`
-     width: 30px;
+  width: 30px;
   height: 30px;
   border: none;
   background-image: url('/assets/img/save.svg');
@@ -150,4 +170,8 @@ const SaveBtn = styled.button`
   background-size: cover;
   outline: none;
 
+  ${breackpoints.md} {
+    width: 20px;
+    height: 20px;
+  }
 `

@@ -1,6 +1,5 @@
 import styled from 'styled-components'
 import { BodyItem } from '../../types/articles'
-import colors from '../ui/colors'
 import MarkDownEditor from './MarkDownEditor'
 import MediumEditor from './MediumEditor'
 import { ArticleType } from '../../types/articles'
@@ -23,6 +22,7 @@ const BodyInput: React.FC<BodyInputProps> = ({ data, setData }) => {
   if (!data.body.length) {
     return null
   }
+
   return (
     <Wrapper>
       {data.body.map((item: BodyItem, i: number) => (
@@ -56,11 +56,11 @@ const BodyInput: React.FC<BodyInputProps> = ({ data, setData }) => {
             />
           }
           {
-            (item.type === 'image' || item.type === 'video' || item.type === 'file') &&
+            (item.type === 'image' || item.type === 'file' || item.type === 'video' ) &&
             <AddFile
               type={item.type}
-              value={item.value}
               remove={deleteItem(i)}
+              url={item.value}
               onChange={(text: string) => {
                 const newItem = { type: item.type, value: text }
                 const newBody = [...data.body]
@@ -78,6 +78,5 @@ const BodyInput: React.FC<BodyInputProps> = ({ data, setData }) => {
 export default BodyInput
 
 const Wrapper = styled.div`
-  padding: 20px;
-  border: 1px solid ${colors.lightGrey};
+
 `

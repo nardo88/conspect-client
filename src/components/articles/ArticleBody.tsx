@@ -9,7 +9,7 @@ type ArticleBodyType = {
 }
 
 const ArticleBody: React.FC<ArticleBodyType> = ({article}) => {
-    console.log(article)
+
     const {title, body} = article
 
     return (
