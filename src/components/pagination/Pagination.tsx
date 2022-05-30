@@ -25,7 +25,7 @@ const Pagination: React.FC<PaginationProps> = ({
     const [maxPageNumberLimit, setmaxPageNumberLimit] = useState(5)
     const [minPageNumberLimit, setminPageNumberLimit] = useState(0)
     const [pages, setPages] = useState<number[]>([])
-
+  
     useEffect(() => {
         setPages(Array.apply(null, Array(Math.ceil(total / pageCount))).map((_, index) => index + 1))
     }, [total, pageCount])
