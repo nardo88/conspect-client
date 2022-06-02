@@ -3,5 +3,6 @@ export type AuthType = {
     logout: () => void
     token: string | null
     userId: string | null
+    ready: boolean
 }
 

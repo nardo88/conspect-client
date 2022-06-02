@@ -7,6 +7,7 @@ export type BodyItem = {
 }
 
 export type ArticleType = {
+    _id?: string
     category: string
     title: string
     userId?: string

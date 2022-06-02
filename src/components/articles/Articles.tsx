@@ -1,13 +1,13 @@
-import { useEffect, useRef, useState } from "react"
-import styled from "styled-components"
-import { ArticleContext } from "../../context/ArticleContext"
-import { useAuth } from "../../hooks/auth.hook"
-import api from "../../hooks/axios.hook"
-import Loader from "../loader/Loader"
-import Burger from "../ui/Burger"
-import colors from "../ui/colors"
-import ArticleBody from "./ArticleBody"
-import Category from "./Category"
+import { useEffect, useRef, useState } from 'react'
+import styled from 'styled-components'
+import { ArticleContext } from '../../context/ArticleContext'
+import { useAuth } from '../../hooks/auth.hook'
+import api from '../../hooks/axios.hook'
+import Loader from '../loader/Loader'
+import Burger from '../ui/Burger'
+import colors from '../ui/colors'
+import ArticleBody from './ArticleBody'
+import Category from './Category'
 
 type Article = {
   id: string
@@ -31,9 +31,10 @@ const Articles: React.FC = () => {
 
   useEffect(() => {
     setIsLoading(true)
-    api.get('/article/preview')
-      .then(res => {
-        setData(res.data);
+    api
+      .get('/article/preview')
+      .then((res) => {
+        setData(res.data)
       })
       .catch((e) => {
         if (e?.response?.data?.message === 'Token expired') {
@@ -47,11 +48,11 @@ const Articles: React.FC = () => {
   useEffect(() => {
     if (articleId) {
       setIsLoading(true)
-      api.get(`/article/${articleId}`)
+      api
+        .get(`/article/${articleId}`)
         .then((response) => setArticle(response.data))
         .catch((e) => console.log(e))
         .finally(() => setIsLoading(false))
-
     }
   }, [articleId])
 
@@ -72,26 +73,31 @@ const Articles: React.FC = () => {
       <Wrapper>
         <NavWrapper open={isOpen} ref={ref}>
           <NavTop>
-            <Burger open={isOpen} onClick={() => setIsOpen(!isOpen)} color={colors.lightGrey} />
+            <Burger
+              open={isOpen}
+              onClick={() => setIsOpen(!isOpen)}
+              color={colors.lightGrey}
+            />
           </NavTop>
           <NavListWrapper open={isOpen}>
             <ul>
-              {data.map((item: DataType) =>
+              {data.map((item: DataType) => (
                 <Category
                   key={item._id}
                   currentCategory={currentCategory}
                   setCurrentCategory={setCurrentCategory}
                   {...item}
-                />)}
+                />
+              ))}
             </ul>
           </NavListWrapper>
         </NavWrapper>
         <Content>
-          {article ? 
-          <ArticleBody article={article} />
-            : 
+          {article ? (
+            <ArticleBody article={article} />
+          ) : (
             <div>Выберите статью</div>
-        }
+          )}
         </Content>
         {isLoading && <Loader />}
       </Wrapper>
@@ -112,8 +118,8 @@ const NavWrapper = styled.div<{ open: boolean }>`
   top: 0;
   bottom: 0;
   width: 320px;
-  transition: .3s;
-  transform: translateX(${({ open }) => open ? '0' : '-285px'});
+  transition: 0.3s;
+  transform: translateX(${({ open }) => (open ? '0' : '-285px')});
   left: 0;
   background-color: ${colors.lightBrown};
 `
@@ -125,22 +131,22 @@ const NavTop = styled.div`
 `
 const NavListWrapper = styled.div<{ open: boolean }>`
   border-top: 1px solid ${colors.grey};
-  visibility: ${({ open }) => open ? 'visible' : 'hidden'};
+  visibility: ${({ open }) => (open ? 'visible' : 'hidden')};
   overflow-y: auto;
   height: calc(100vh - 90px);
 
-  &::-webkit-scrollbar-track{
+  &::-webkit-scrollbar-track {
     border-radius: 10px;
-    background-color:  ${colors.grey};
+    background-color: ${colors.grey};
   }
 
-  &::-webkit-scrollbar{
-      width: 5px;
-      background: ${colors.grey};
+  &::-webkit-scrollbar {
+    width: 5px;
+    background: ${colors.grey};
   }
-  &::-webkit-scrollbar-thumb{
-      border-radius: 10px;
-      background-color: ${colors.lightBrown};
+  &::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: ${colors.lightBrown};
   }
 `
 const Content = styled.div`
@@ -148,17 +154,17 @@ const Content = styled.div`
   overflow-y: auto;
   overflow-x: hidden;
 
-  &::-webkit-scrollbar-track{
+  &::-webkit-scrollbar-track {
     border-radius: 10px;
-    background-color:  ${colors.grey};
+    background-color: ${colors.grey};
   }
 
-  &::-webkit-scrollbar{
-      width: 5px;
-      background: ${colors.grey};
+  &::-webkit-scrollbar {
+    width: 5px;
+    background: ${colors.grey};
   }
-  &::-webkit-scrollbar-thumb{
-      border-radius: 10px;
-      background-color: ${colors.lightBrown};
+  &::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: ${colors.lightBrown};
   }
 `

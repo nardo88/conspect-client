@@ -5,10 +5,6 @@ import { DefaultOptions } from '../../types/default.options'
 import colors from '../ui/colors'
 import { bodyVariants } from '../ui/settings'
 import BodyInput from './BodyInput'
-import Loader from '../loader/Loader'
-import api from '../../hooks/axios.hook'
-import { useContext } from 'react'
-import { AuthContext } from '../../context/AuthContext'
 import breackpoints from '../ui/breackpoints'
 
 type SettingsType = {
@@ -18,11 +14,10 @@ type SettingsType = {
 
 const Body: React.FC<SettingsType> = ({ article, setArticle }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
-  const [isLoading, setIsLoading] = useState<boolean>(false)
   const [down, setDown] = useState<boolean>(false)
   const ref = useRef<HTMLDivElement>(null)
   const listRef = useRef<HTMLDivElement>(null)
-  const { userId } = useContext(AuthContext)
+
 
   const addBlock = (type: any) => {
     setIsOpen(false)
@@ -51,38 +46,10 @@ const Body: React.FC<SettingsType> = ({ article, setArticle }) => {
     }
   }, [isOpen])
 
-  const createArticle = async () => {
-    if (!article.title || !article.category) {
-      return alert('Заполните все поля!')
-    }
-
-    if (!article.body.length) {
-      return alert('Пустую стратью сохранить нельзя!')
-    }
-
-    setIsLoading(true)
-    await api
-      .post('/article', {
-        userId,
-        ...article,
-      })
-      .then((res) => {
-        setIsLoading(false)
-        if (res.status === 200) {
-          alert('Статья успешно сохранена')
-        }
-      })
-      .catch((error: Error) => {
-        console.log(error)
-      })
-      .finally(() => setIsLoading(false))
-  }
+  
 
   return (
     <BodyWrapper>
-      <div className="top df jcfe">
-        <SaveBtn onClick={createArticle} />
-      </div>
       <div className="content mt20">
         <BodyInput data={article} setData={setArticle} />
       </div>
@@ -102,7 +69,6 @@ const Body: React.FC<SettingsType> = ({ article, setArticle }) => {
           )}
         </AddWrap>
       </div>
-      {isLoading && <Loader />}
     </BodyWrapper>
   )
 }
@@ -161,17 +127,4 @@ const AddList = styled.div<{down?: boolean}>`
   }
 `
 
-const SaveBtn = styled.button`
-  width: 30px;
-  height: 30px;
-  border: none;
-  background-image: url('/assets/img/save.svg');
-  background-color: transparent;
-  background-size: cover;
-  outline: none;
 
-  ${breackpoints.md} {
-    width: 20px;
-    height: 20px;
-  }
-`
