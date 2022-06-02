@@ -24,7 +24,7 @@ type Article = {
 }
 
 const ArticleList: React.FC = () => {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
   const LIMIT = 10
   const [data, setData] = useState<Article[]>()
   const [isLoading, setIsLoading] = useState(false)

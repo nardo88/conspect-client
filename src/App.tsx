@@ -31,7 +31,9 @@ function App() {
           <Content>
             {isAuthenticated ? (
               <Routes>
-                <Route path="/" element={<Articles />} />
+                <Route path="/" element={<Articles />}>
+                  <Route path=":id" element={<Articles />} />
+                </Route>
                 <Route path="/articles" element={<ArticleList />} />
                 <Route path="/editor" element={<Editor />}>
                   <Route path=":id" element={<Editor />} />

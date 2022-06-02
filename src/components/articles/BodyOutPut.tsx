@@ -14,9 +14,6 @@ type BodyItemProps = {
 }
 
 const BodyElem: React.FC<BodyItemProps> = ({ elem }) => {
-  if (elem.type === 'image') {
-    console.log(elem.value)
-  }
 
   return (
     <div>

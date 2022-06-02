@@ -13,7 +13,6 @@ type CategoryProps = {
 
 const Category: React.FC<CategoryProps> = ({ _id, titles, currentCategory, setCurrentCategory }) => {
     const ref = useRef<HTMLDivElement>(null)
-
     const clickHandler = (value: string) => {
         value === currentCategory ? setCurrentCategory('') : setCurrentCategory(value)
     }

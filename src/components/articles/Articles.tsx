@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { useParams } from 'react-router-dom'
 import styled from 'styled-components'
 import { ArticleContext } from '../../context/ArticleContext'
 import { useAuth } from '../../hooks/auth.hook'
@@ -20,6 +21,7 @@ type DataType = {
 }
 
 const Articles: React.FC = () => {
+  const params = useParams()
   const { logout } = useAuth() as any
   const ref = useRef<HTMLDivElement>(null)
   const [isLoading, setIsLoading] = useState(false)
@@ -27,7 +29,6 @@ const Articles: React.FC = () => {
   const [data, setData] = useState<DataType[]>([])
   const [currentCategory, setCurrentCategory] = useState('')
   const [article, setArticle] = useState(null)
-  const [articleId, setArticleId] = useState('')
 
   useEffect(() => {
     setIsLoading(true)
@@ -46,15 +47,15 @@ const Articles: React.FC = () => {
   }, [logout])
 
   useEffect(() => {
-    if (articleId) {
+    if (params.id) {
       setIsLoading(true)
       api
-        .get(`/article/${articleId}`)
+        .get(`/article/${params.id}`)
         .then((response) => setArticle(response.data))
         .catch((e) => console.log(e))
         .finally(() => setIsLoading(false))
     }
-  }, [articleId])
+  }, [params])
 
   useEffect(() => {
     const clickHandler = (e: any) => {
@@ -69,7 +70,7 @@ const Articles: React.FC = () => {
   }, [])
 
   return (
-    <ArticleContext.Provider value={{ setArticleId, setIsOpen }}>
+    <ArticleContext.Provider value={{ setIsOpen }}>
       <Wrapper>
         <NavWrapper open={isOpen} ref={ref}>
           <NavTop>
