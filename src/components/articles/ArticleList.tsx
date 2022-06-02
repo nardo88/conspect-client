@@ -11,8 +11,9 @@ import Button from '../ui/Button'
 import dayjs from 'dayjs'
 import breackpoints from '../ui/breackpoints'
 import Pagination from '../pagination/Pagination'
-import { RemoveBtn } from '../ui/components'
+import { Overlay, RemoveBtn } from '../ui/components'
 import useDebounce from '../../hooks/debounce.hook'
+import Editor from '../editor/Editor'
 
 type Article = {
   title: string
@@ -28,6 +29,7 @@ const ArticleList: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false)
   const [currentPage, setCurrentPage] = useState<number>(1)
   const [total, seTotal] = useState(0)
+  const [currentArticleId, setCurrentArticleId] = useState<null | string>(null)
 
   // Filters
   const [category, setCategory] = useState<DefaultOptions>({
@@ -45,7 +47,6 @@ const ArticleList: React.FC = () => {
         }&title=${title}`
       )
       .then((res) => {
-        console.log(res.data)
         setData(res.data.data)
         seTotal(res.data.total)
       })
@@ -117,7 +118,7 @@ const ArticleList: React.FC = () => {
                   {dayjs(item.createdAt).format('DD.MM.YYYY')}
                 </div>
                 <div className="btn">
-                  <EditBtn />
+                  <EditBtn onClick={() => setCurrentArticleId(item.id)} />
                 </div>
                 <div className="btn">
                   <RemoveBtn onClick={() => removeArticle(item.id)} />
@@ -139,6 +140,16 @@ const ArticleList: React.FC = () => {
         </div>
       </DataWrapper>
       {isLoading && <Loader />}
+      {currentArticleId && (
+        <Overlay>
+          <Wrapper>
+            <div>
+                <button onClick={() => setCurrentArticleId(null)}>Закрыть</button>
+            </div>
+            <Editor />
+          </Wrapper>
+        </Overlay>
+      )}
     </AdminWrapper>
   )
 }
@@ -251,4 +262,12 @@ const EditBtn = styled.button`
     width: 20px;
     height: 20px;
   }
+`
+
+const Wrapper = styled.div`
+  background: ${colors.white};
+  border-radius: 4px;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
 `
