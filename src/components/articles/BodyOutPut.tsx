@@ -4,6 +4,7 @@ import Editor from 'react-medium-editor'
 import styled from 'styled-components'
 import MDEditor from '@uiw/react-md-editor'
 import colors from '../ui/colors'
+import breackpoints from '../ui/breackpoints'
 
 type BodyOutputProps = {
   data: BodyItem[]
@@ -80,6 +81,10 @@ const Image = styled.img`
   max-width: 860px;
   border-radius: 4px;
   border: 1px solid ${colors.lightBrown};
+
+  ${breackpoints.md}{
+    width: 100%;
+  }
 `
 
 const Video = styled.video`
