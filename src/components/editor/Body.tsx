@@ -112,6 +112,7 @@ const AddList = styled.div<{down?: boolean}>`
   }
 
   & > ul {
+    list-style-type: none;
     li {
       font-size: 16px;
       padding: 6px 10px;

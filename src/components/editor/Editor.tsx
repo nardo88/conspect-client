@@ -10,11 +10,7 @@ import Burger from '../ui/Burger'
 import colors from '../ui/colors'
 import Body from './Body'
 import Settings from './Settings'
-
-/**
- *
- * currentTab - settings | content
- */
+import { useNavigate } from 'react-router-dom'
 
 const Editor: React.FC = () => {
   const defaultArticle = {
@@ -22,6 +18,7 @@ const Editor: React.FC = () => {
     title: '',
     body: [],
   }
+  const navigate = useNavigate()
   const params = useParams()
   const [isOpen, setIsOpen] = useState(false)
   const [currentTab, setCurrentTab] = useState<string>('settings')
@@ -62,7 +59,7 @@ const Editor: React.FC = () => {
       .then((res) => {
         setIsLoading(false)
         if (res.status === 200) {
-          alert('Статья успешно сохранена')
+          navigate('/articles')
         }
       })
       .catch((error: Error) => {
@@ -163,6 +160,7 @@ const Wrapper = styled.div`
 const TabList = styled.ul<{ open: boolean }>`
   position: static;
   transform: none;
+  list-style-type: none;
   ${breackpoints.md} {
     position: absolute;
     left: 0;

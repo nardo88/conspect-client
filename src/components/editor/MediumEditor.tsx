@@ -92,9 +92,8 @@ const EditorWrapper = styled.div`
     padding: 5px;
   }
 
-  ul {
-    padding-left: 2rem;
-    list-style-type: disc;
+  & > ul {
+    padding-left: 5rem;
   }
 
   ol {
