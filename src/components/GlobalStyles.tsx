@@ -10,10 +10,6 @@ const GlobalStyles = createGlobalStyle`
         font-family: Roboto;
     }
 
-    ul, ol {
-        list-style: none;
-    }
-
     button{
         cursor: pointer;
         outline: none;
