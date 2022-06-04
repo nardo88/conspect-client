@@ -78,7 +78,6 @@ const TextWrapper = styled.div`
 
 const Image = styled.img`
   max-width: 860px;
-  width: 100%;
   border-radius: 4px;
   border: 1px solid ${colors.lightBrown};
 `
