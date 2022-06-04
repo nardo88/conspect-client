@@ -80,6 +80,7 @@ const Menu = styled.div`
   }
 
   & > ul {
+    list-style-type: none;
     li {
       & > a {
         font-size: 18px;
