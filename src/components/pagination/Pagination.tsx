@@ -67,7 +67,7 @@ const Pagination: React.FC<PaginationProps> = ({
 
     return (
         <div className="mt32">
-            <ul className="df">
+            <ul className="df lstn">
                 <li>
                     <PrevBtn
                         disabled={currentPage === 1 ? true : false}

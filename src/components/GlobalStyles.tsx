@@ -82,6 +82,10 @@ const GlobalStyles = createGlobalStyle`
     .posa{
 
     }
+
+    .lstn{
+        list-style-type: none;
+    }
 `
 
 export default GlobalStyles
