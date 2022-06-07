@@ -58,6 +58,7 @@ const Nav = styled.nav`
     ul{
         display: flex;
         align-items: center;
+        list-style-type: none;
 
         li{
             margin-left: 15px;
