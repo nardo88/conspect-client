@@ -17,7 +17,6 @@ const GlobalStyles = createGlobalStyle`
 
     a{
         color: inherit;
-        text-decoration: none;
     }
 
     .h20{
@@ -49,6 +48,9 @@ const GlobalStyles = createGlobalStyle`
 
     .mt20{
         margin-top: 20px;
+    }
+    .mt15{
+        margin-top: 15px;
     }
 
     .mb20{

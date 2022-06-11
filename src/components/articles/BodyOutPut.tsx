@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import MDEditor from '@uiw/react-md-editor'
 import colors from '../ui/colors'
 import breackpoints from '../ui/breackpoints'
+import { useRef } from 'react'
 
 type BodyOutputProps = {
   data: BodyItem[]
@@ -15,6 +16,7 @@ type BodyItemProps = {
 }
 
 const BodyElem: React.FC<BodyItemProps> = ({ elem }) => {
+  const ref = useRef<HTMLDivElement>(null)
 
   return (
     <div>
@@ -57,6 +59,16 @@ const BodyElem: React.FC<BodyItemProps> = ({ elem }) => {
           <Video controls={true} src={elem.value} />
         </TextWrapper>
       )}
+
+      {elem.type === 'frame' && (
+        <div ref={ref} className="mt15">
+          <_Iframe
+            src={elem.value}
+            frameBorder='0'
+            customHeight={(ref.current?.offsetTop || 0) + 85}
+          />
+        </div>
+      )}
     </div>
   )
 }
@@ -82,7 +94,7 @@ const Image = styled.img`
   border-radius: 4px;
   border: 1px solid ${colors.lightBrown};
 
-  ${breackpoints.md}{
+  ${breackpoints.md} {
     width: 100%;
   }
 `
@@ -90,4 +102,26 @@ const Image = styled.img`
 const Video = styled.video`
   max-width: 560px;
   width: 100%;
+`
+
+const _Iframe = styled.iframe<{customHeight: number}>`
+  width: calc(100% + 40px);
+  margin-left: -20px;
+  margin-right: -20px;
+  height: calc(100vh - ${({customHeight}) => customHeight + 'px'});
+
+  &::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background-color: ${colors.grey};
+  }
+
+  &::-webkit-scrollbar {
+    width: 5px;
+    background: ${colors.grey};
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: ${colors.lightBrown};
+  }
+
 `

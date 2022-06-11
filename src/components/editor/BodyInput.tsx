@@ -4,6 +4,7 @@ import MarkDownEditor from './MarkDownEditor'
 import MediumEditor from './MediumEditor'
 import { ArticleType } from '../../types/articles'
 import AddFile from './AddFile'
+import Frame from './Frame'
 
 
 type BodyInputProps = {
@@ -22,6 +23,8 @@ const BodyInput: React.FC<BodyInputProps> = ({ data, setData }) => {
   if (!data.body.length) {
     return null
   }
+
+  console.log(data)
 
   return (
     <Wrapper>
@@ -44,6 +47,20 @@ const BodyInput: React.FC<BodyInputProps> = ({ data, setData }) => {
           {
             item.type === 'text' &&
             <MediumEditor
+              type={item.type}
+              value={item.value}
+              remove={deleteItem(i)}
+              onChange={(text: string) => {
+                const newItem = { type: item.type, value: text }
+                const newBody = [...data.body]
+                newBody[i] = newItem
+                setData({ ...data, body: newBody })
+              }}
+            />
+          }
+           {
+            item.type === 'frame' &&
+            <Frame
               type={item.type}
               value={item.value}
               remove={deleteItem(i)}

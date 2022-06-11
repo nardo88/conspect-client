@@ -1,4 +1,4 @@
-export type ArticleEnum = 'markdown' | 'text' | 'image' | 'video' | 'file'
+export type ArticleEnum = 'markdown' | 'text' | 'image' | 'video' | 'file' | 'frame'
 
 export type BodyItem = {
     type: ArticleEnum

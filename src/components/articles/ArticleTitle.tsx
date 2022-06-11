@@ -39,6 +39,7 @@ const Title = styled.li<{ active?: boolean }>`
     position: relative;
     background: ${({ active }) => (active ? colors.green : colors.grey)};
     border-bottom: 1px solid ${colors.lightGrey};
+    text-decoration: none;
 
     &:hover {
       background: ${colors.green};

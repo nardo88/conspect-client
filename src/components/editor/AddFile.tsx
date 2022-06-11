@@ -8,7 +8,7 @@ import { RemoveBtn } from '../ui/components'
 import breackpoints from '../ui/breackpoints'
 
 type PropsType = {
-  type: 'text' | 'image' | 'markdown' | 'video' | 'file'
+  type: 'text' | 'image' | 'markdown' | 'video' | 'file' | 'frame'
   onChange: (value: string) => void
   remove: () => void
   url: string
@@ -97,7 +97,7 @@ const AddFile: React.FC<PropsType> = ({ type, onChange, remove, url }) => {
 
 export default AddFile
 
-const Wrapper = styled.div`
+export const Wrapper = styled.div`
   margin-bottom: 20px;
   padding: 16px;
   border: 1px solid ${colors.grey};
@@ -116,7 +116,7 @@ const Wrapper = styled.div`
     line-height: 1;
   }
 `
-const Control = styled.div`
+export const Control = styled.div`
   display: flex;
 `
 

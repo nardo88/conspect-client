@@ -27,6 +27,7 @@ export const bodyVariants = [
   { id: 'markdown', title: 'MarkDown' },
   { id: 'video', title: 'Видео' },
   { id: 'file', title: 'Файл' },
+  { id: 'frame', title: 'Фрейм' },
 ]
 
 export const variantsTranslate = {
@@ -35,6 +36,7 @@ export const variantsTranslate = {
   markdown: 'MarkDown',
   video: 'Видео',
   file: 'Файл',
+  frame: 'Фрейм',
 }
 
 

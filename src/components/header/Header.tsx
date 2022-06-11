@@ -90,6 +90,7 @@ const Nav = styled.nav`
                 min-height: 100%;
                 padding: 20px 0;
                 font-size: 16px;
+                text-decoration: none;
 
                 ${breackpoints.md}{
                     font-size: 14px;

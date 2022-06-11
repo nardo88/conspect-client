@@ -9,7 +9,7 @@ import { variantsTranslate } from '../ui/settings'
 import { RemoveBtn } from '../ui/components'
 
 type EditorProps = {
-  type: 'text' | 'image' | 'markdown' | 'video' | 'file'
+  type: 'text' | 'image' | 'markdown' | 'video' | 'file' | 'frame'
   value: string
   onChange: (value: string) => void
   remove: () => void
