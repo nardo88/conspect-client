@@ -34,7 +34,7 @@ export const useAuth = (): AuthType => {
 
     if (data && data.token) {
       api
-        .get('/user')
+        .get('/user/session')
         .then((res) => {
             login(data.token, data.userId, res?.data?.roles)
         })
