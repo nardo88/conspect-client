@@ -16,7 +16,7 @@ const buttonWrapper = `
 `
 
 type SignInPropsType = {
-  login: (token: string, userId: string) => void
+  login: (token: string, userId: string, roles: string[]) => void
 }
 
 const SignIn = ({ login }: SignInPropsType) => {
@@ -34,8 +34,8 @@ const SignIn = ({ login }: SignInPropsType) => {
       .post("/user/signin", { ...formData })
       .then((response) => {
         if (response.status === 200) {
-          const { token, id } = response.data
-          login(token, id)
+          const { token, id, roles } = response.data
+          login(token, id, roles)
           setFormData({
             email: "",
             password: "",

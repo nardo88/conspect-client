@@ -1,15 +1,14 @@
-import { useContext, useEffect, useRef, useState } from "react"
-import { AuthContext } from "../../context/AuthContext"
-import styled from "styled-components"
-import colors from "../ui/colors"
-import { Link } from "react-router-dom"
-import breackpoints from "../ui/breackpoints"
+import { useContext, useEffect, useRef, useState } from 'react'
+import { AuthContext } from '../../context/AuthContext'
+import styled from 'styled-components'
+import colors from '../ui/colors'
+import { Link } from 'react-router-dom'
+import breackpoints from '../ui/breackpoints'
 
 const ProfileMenu = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
-  const { logout } = useContext(AuthContext)
+  const { logout, roles } = useContext<any>(AuthContext)
   const ref = useRef<HTMLDivElement>(null)
-
   const missClick = (e: any) => {
     if (ref.current && !ref.current.contains(e.target)) {
       setIsOpen(false)
@@ -17,9 +16,9 @@ const ProfileMenu = () => {
   }
 
   useEffect(() => {
-    window.addEventListener("click", missClick)
+    window.addEventListener('click', missClick)
     return () => {
-      window.removeEventListener("click", missClick)
+      window.removeEventListener('click', missClick)
     }
   }, [])
 
@@ -32,17 +31,23 @@ const ProfileMenu = () => {
         <Menu>
           <ul>
             <li onClick={() => setIsOpen(false)}>
-              <Link to={"/profile"}>Профиль</Link>
+              <Link to={'/profile'}>Профиль</Link>
             </li>
-            <li onClick={() => setIsOpen(false)}>
-              <Link to={"/articles"}>Управление конспектами</Link>
-            </li>
-            <li onClick={() => setIsOpen(false)}>
-              <Link to={"/roles"}>Роли</Link>
-            </li>
-            <li onClick={() => setIsOpen(false)}>
-              <Link to={"/editor"}>Создать конспект</Link>
-            </li>
+            {roles.includes('admin') && (
+              <li onClick={() => setIsOpen(false)}>
+                <Link to={'/articles'}>Управление конспектами</Link>
+              </li>
+            )}
+            {roles.includes('admin') && (
+              <li onClick={() => setIsOpen(false)}>
+                <Link to={'/roles'}>Роли</Link>
+              </li>
+            )}
+            {roles.includes('admin') && (
+              <li onClick={() => setIsOpen(false)}>
+                <Link to={'/editor'}>Создать конспект</Link>
+              </li>
+            )}
             <li onClick={() => logout()}>
               <a href="#!">Выйти</a>
             </li>
@@ -75,8 +80,8 @@ const Menu = styled.div`
   width: 300px;
   z-index: 1000;
 
-  ${breackpoints.md}{
-      right: -20px;
+  ${breackpoints.md} {
+    right: -20px;
   }
 
   & > ul {

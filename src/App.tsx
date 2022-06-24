@@ -12,7 +12,7 @@ import Editor from './components/editor/Editor'
 import Loader from './components/loader/Loader'
 
 function App() {
-  const { token, userId, login, logout, ready } = useAuth() as any
+  const { token, userId, login, logout, ready, roles } = useAuth() as any
   const isAuthenticated = !!token
 
   return (
@@ -25,6 +25,7 @@ function App() {
             login,
             logout,
             isAuthenticated,
+            roles
           }}
         >
           <Header />
