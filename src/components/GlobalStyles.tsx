@@ -65,6 +65,10 @@ const GlobalStyles = createGlobalStyle`
         display: flex;
     }
 
+    .dif{
+        display: inline-flex;
+    }
+
     .jcsb{
         justify-content: space-between;
     }
@@ -81,12 +85,16 @@ const GlobalStyles = createGlobalStyle`
         position: relative;
     }
 
-    .posa{
-
+    .tac{
+        text-align: center;
     }
 
     .lstn{
         list-style-type: none;
+    }
+
+    .cup{
+        cursor: pointer;
     }
 `
 

@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import breackpoints from './breackpoints'
+import colors from './colors'
 
 export const Container = styled.div`
   width: 100%;
@@ -38,4 +39,10 @@ export const Overlay = styled.div`
     justify-content: center;
     background-color: rgba(0,0,0,.3);
     padding: 30px;
+`
+
+export const Text = styled.p<{color?: string, styles?: string}>`
+  font-size: 16px;
+  color: ${({color}) => color || colors.brown};
+  ${({styles}) => styles}
 `
