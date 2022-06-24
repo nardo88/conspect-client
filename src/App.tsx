@@ -10,6 +10,7 @@ import Articles from './components/articles/Articles'
 import ArticleList from './components/articles/ArticleList'
 import Editor from './components/editor/Editor'
 import Loader from './components/loader/Loader'
+import Roles from './components/roles/Roles'
 
 function App() {
   const { token, userId, login, logout, ready, roles } = useAuth() as any
@@ -36,6 +37,7 @@ function App() {
                   <Route path=":id" element={<Articles />} />
                 </Route>
                 <Route path="/articles" element={<ArticleList />} />
+                <Route path="/roles" element={<Roles />} />
                 <Route path="/editor" element={<Editor />}>
                   <Route path=":id" element={<Editor />} />
                 </Route>
