@@ -32,7 +32,7 @@ const BodyInput: React.FC<BodyInputProps> = ({ data, setData }) => {
       {data.body.map((item: BodyItem, i: number) => (
         <div key={i}>
           <div className='df jcfe'>
-            <DndElement setData={setData} data={data} />
+            <DndElement setData={setData} data={item} />
           </div>
           {
             item.type === 'markdown' &&

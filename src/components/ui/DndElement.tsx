@@ -1,14 +1,15 @@
 import styled from "styled-components"
+import { ArticleType, BodyItem } from "../../types/articles"
 import colors from "./colors"
 
 interface DndElementProps {
 
-    setData: (val:any) => void
-    data: any[]
+    setData: (val:ArticleType) => void
+    data: BodyItem
 }
 
 const DndElement:React.FC<DndElementProps> = ({setData, data}) => {
-
+    console.log(data)
     return (
         <Dnd draggable={true}>
             <span />
