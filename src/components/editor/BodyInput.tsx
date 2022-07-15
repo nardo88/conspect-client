@@ -5,7 +5,8 @@ import MediumEditor from './MediumEditor'
 import { ArticleType } from '../../types/articles'
 import AddFile from './AddFile'
 import Frame from './Frame'
-
+import DndElement from '../ui/DndElement'
+import { useState } from 'react'
 
 type BodyInputProps = {
   data: ArticleType
@@ -13,10 +14,13 @@ type BodyInputProps = {
 }
 
 const BodyInput: React.FC<BodyInputProps> = ({ data, setData }) => {
+  const [startIndex, setStartIndex] = useState<null | number>(null)
+  const [currentItem, setCurrentItem] = useState<any>(null)
+
   const deleteItem = (index: number) => {
-    return function(){
+    return function () {
       const newBody = data.body.filter((_, i) => i !== index)
-      setData({...data, body: newBody})
+      setData({ ...data, body: newBody })
     }
   }
 
@@ -24,14 +28,23 @@ const BodyInput: React.FC<BodyInputProps> = ({ data, setData }) => {
     return null
   }
 
-  console.log(data)
-
   return (
     <Wrapper>
       {data.body.map((item: BodyItem, i: number) => (
         <div key={i}>
-          {
-            item.type === 'markdown' &&
+          <div className="df jcfe">
+            <DndElement
+              setData={setData}
+              item={item}
+              data={data}
+              index={i}
+              startIndex={startIndex}
+              setStartIndex={setStartIndex}
+              currentItem={currentItem}
+              setCurrentItem={setCurrentItem}
+            />
+          </div>
+          {item.type === 'markdown' && (
             <MarkDownEditor
               type={item.type}
               value={item.value}
@@ -43,9 +56,8 @@ const BodyInput: React.FC<BodyInputProps> = ({ data, setData }) => {
                 setData({ ...data, body: newBody })
               }}
             />
-          }
-          {
-            item.type === 'text' &&
+          )}
+          {item.type === 'text' && (
             <MediumEditor
               type={item.type}
               value={item.value}
@@ -57,9 +69,8 @@ const BodyInput: React.FC<BodyInputProps> = ({ data, setData }) => {
                 setData({ ...data, body: newBody })
               }}
             />
-          }
-           {
-            item.type === 'frame' &&
+          )}
+          {item.type === 'frame' && (
             <Frame
               type={item.type}
               value={item.value}
@@ -71,9 +82,10 @@ const BodyInput: React.FC<BodyInputProps> = ({ data, setData }) => {
                 setData({ ...data, body: newBody })
               }}
             />
-          }
-          {
-            (item.type === 'image' || item.type === 'file' || item.type === 'video' ) &&
+          )}
+          {(item.type === 'image' ||
+            item.type === 'file' ||
+            item.type === 'video') && (
             <AddFile
               type={item.type}
               remove={deleteItem(i)}
@@ -85,7 +97,7 @@ const BodyInput: React.FC<BodyInputProps> = ({ data, setData }) => {
                 setData({ ...data, body: newBody })
               }}
             />
-          }
+          )}
         </div>
       ))}
     </Wrapper>
@@ -94,6 +106,4 @@ const BodyInput: React.FC<BodyInputProps> = ({ data, setData }) => {
 
 export default BodyInput
 
-const Wrapper = styled.div`
-
-`
+const Wrapper = styled.div``
