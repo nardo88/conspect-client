@@ -46,3 +46,4 @@ export const Text = styled.p<{color?: string, styles?: string}>`
   color: ${({color}) => color || colors.brown};
   ${({styles}) => styles}
 `
+

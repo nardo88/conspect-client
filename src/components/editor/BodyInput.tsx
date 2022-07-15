@@ -5,6 +5,7 @@ import MediumEditor from './MediumEditor'
 import { ArticleType } from '../../types/articles'
 import AddFile from './AddFile'
 import Frame from './Frame'
+import DndElement from '../ui/DndElement'
 
 
 type BodyInputProps = {
@@ -30,6 +31,9 @@ const BodyInput: React.FC<BodyInputProps> = ({ data, setData }) => {
     <Wrapper>
       {data.body.map((item: BodyItem, i: number) => (
         <div key={i}>
+          <div className='df jcfe'>
+            <DndElement setData={setData} data={data} />
+          </div>
           {
             item.type === 'markdown' &&
             <MarkDownEditor
