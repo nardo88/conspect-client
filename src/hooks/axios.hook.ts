@@ -3,8 +3,9 @@ import axios from 'axios'
 const api = axios.create({
   baseURL: 'https://conspect-api.vercel.app/api/v1',
   headers: {
-    'Content-Type': 'application/json'
+    'Content-Type': 'application/json',
   },
+  timeout: 20000,
 })
 
 api.interceptors.request.use((config: any) => {
@@ -18,4 +19,3 @@ api.interceptors.request.use((config: any) => {
 })
 
 export default api
-
