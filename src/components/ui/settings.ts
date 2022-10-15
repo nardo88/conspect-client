@@ -22,6 +22,7 @@ export const categories = [
   { id: 'polifils', title: 'Polifils' },
   { id: 'Plugins', title: 'Plugins' },
   { id: 'womanUP', title: 'WomanUP' },
+  { id: 'webpack', title: 'Webpack' },
 ]
 
 export const bodyVariants = [
@@ -41,10 +42,3 @@ export const variantsTranslate = {
   file: 'Файл',
   frame: 'Фрейм',
 }
-
-
-
-
-
-
-
