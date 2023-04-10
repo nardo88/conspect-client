@@ -23,6 +23,7 @@ export const categories = [
   { id: 'Plugins', title: 'Plugins' },
   { id: 'womanUP', title: 'WomanUP' },
   { id: 'webpack', title: 'Webpack' },
+  { id: 'vite', title: 'Vite' },
 ]
 
 export const bodyVariants = [
