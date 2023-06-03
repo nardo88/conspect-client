@@ -1,8 +1,8 @@
 import axios from 'axios'
 
 const api = axios.create({
-  // baseURL: 'https://conspect-api.vercel.app/api/v1',
-  baseURL: 'http://localhost:5000/api/v1',
+  baseURL: 'https://conspect-api.vercel.app/api/v1',
+  // baseURL: 'http://localhost:5000/api/v1',
   headers: {
     'Content-Type': 'application/json',
   },
