@@ -9,10 +9,11 @@ import { variantsTranslate } from '../ui/settings'
 import { RemoveBtn } from '../ui/components'
 
 type EditorProps = {
-  type: 'text' | 'image' | 'markdown' | 'video' | 'file' | 'frame'
+  type?: 'text' | 'image' | 'markdown' | 'video' | 'file' | 'frame'
   value: string
+  label?: string
   onChange: (value: string) => void
-  remove: () => void
+  remove?: () => void
 }
 
 const MediumEditor: React.FC<EditorProps> = ({
@@ -20,6 +21,7 @@ const MediumEditor: React.FC<EditorProps> = ({
   onChange,
   type,
   remove,
+  label,
 }) => {
   useEffect(() => {
     require('medium-editor/dist/css/medium-editor.css')
@@ -28,9 +30,10 @@ const MediumEditor: React.FC<EditorProps> = ({
 
   return (
     <EditorWrapper>
-      <span>{variantsTranslate[type]}</span>
+      {type && <span>{variantsTranslate[type]}</span>}
+      {label && <span>{label}</span>}
       <ControlWrapper>
-        <RemoveBtn onClick={remove} title="Удалить" />
+        {remove && <RemoveBtn onClick={remove} title="Удалить" />}
       </ControlWrapper>
       <Editor
         text={value}

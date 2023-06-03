@@ -26,7 +26,7 @@ function App() {
             login,
             logout,
             isAuthenticated,
-            roles
+            roles,
           }}
         >
           <Header />
@@ -45,6 +45,9 @@ function App() {
               </Routes>
             ) : (
               <Routes>
+                <Route path="/" element={<Articles />}>
+                  <Route path=":id" element={<Articles />} />
+                </Route>
                 <Route path="/signin" element={<SignIn login={login} />} />
                 <Route path="/signup" element={<SignUp />} />
                 <Route path="*" element={<NotFoundPage />} />

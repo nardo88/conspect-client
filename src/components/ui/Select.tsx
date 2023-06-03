@@ -48,7 +48,6 @@ const Select: React.FC<SelectProps> = ({
         <SelectTop active={isOpen} onClick={() => setIsOpen(!isOpen)}>
           {value ? value.title : ''}
         </SelectTop>
-        {/* <div></div> */}
       </div>
       {isOpen && (
         <DropDown>
@@ -102,18 +101,18 @@ const DropDown = styled.div`
   overflow-y: auto;
   overflow-x: hidden;
 
-  &::-webkit-scrollbar-track{
+  &::-webkit-scrollbar-track {
     border-radius: 10px;
-    background-color:  ${colors.lightGrey};
+    background-color: ${colors.lightGrey};
   }
 
-  &::-webkit-scrollbar{
-      width: 5px;
-      background: transparent;
+  &::-webkit-scrollbar {
+    width: 5px;
+    background: transparent;
   }
-  &::-webkit-scrollbar-thumb{
-      border-radius: 10px;
-      background-color: ${colors.grey};
+  &::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: ${colors.grey};
   }
 
   & > ul {

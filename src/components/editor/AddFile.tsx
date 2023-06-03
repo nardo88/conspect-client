@@ -10,11 +10,18 @@ import breackpoints from '../ui/breackpoints'
 type PropsType = {
   type: 'text' | 'image' | 'markdown' | 'video' | 'file' | 'frame'
   onChange: (value: string) => void
-  remove: () => void
+  remove?: () => void
   url: string
+  label?: string
 }
 
-const AddFile: React.FC<PropsType> = ({ type, onChange, remove, url }) => {
+const AddFile: React.FC<PropsType> = ({
+  type,
+  onChange,
+  remove,
+  url,
+  label,
+}) => {
   const [file, setFile] = useState(null) as any
   const [urlFile, setUrlFile] = useState(url)
   const [progress, setProgress] = useState(0)
@@ -51,10 +58,12 @@ const AddFile: React.FC<PropsType> = ({ type, onChange, remove, url }) => {
         },
         () => {
           // После того как файл загружен мы получаем ссылку
-          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL:string) => {
-            setUrlFile(downloadURL)
-            onChange(downloadURL)
-          })
+          getDownloadURL(uploadTask.snapshot.ref).then(
+            (downloadURL: string) => {
+              setUrlFile(downloadURL)
+              onChange(downloadURL)
+            }
+          )
         }
       )
     } else {
@@ -64,9 +73,9 @@ const AddFile: React.FC<PropsType> = ({ type, onChange, remove, url }) => {
 
   return (
     <Wrapper>
-      <span>{variantsTranslate[type]}</span>
+      {label ? <span>{label}</span> : <span>{variantsTranslate[type]}</span>}
       <Control>
-        <RemoveBtn onClick={remove} title="Удалить" />
+        {remove && <RemoveBtn onClick={remove} title="Удалить" />}
         <InputWrapper>
           <input
             type="file"
@@ -86,7 +95,13 @@ const AddFile: React.FC<PropsType> = ({ type, onChange, remove, url }) => {
       )}
       {type === 'image' && urlFile && <PreviewImage src={urlFile} alt="" />}
       {type === 'file' && urlFile && (
-        <a download={urlFile} href={urlFile} className="mt20 df" target="_blank" rel="noreferrer">
+        <a
+          download={urlFile}
+          href={urlFile}
+          className="mt20 df"
+          target="_blank"
+          rel="noreferrer"
+        >
           Скачать
         </a>
       )}
@@ -118,6 +133,7 @@ export const Wrapper = styled.div`
 `
 export const Control = styled.div`
   display: flex;
+  gap: 25px;
 `
 
 const InfoContainer = styled.div`
@@ -160,7 +176,6 @@ const InputWrapper = styled.div`
   height: 30px;
   position: relative;
   background-image: url('/assets/img/upload.svg');
-  margin-left: 25px;
 
   & > input {
     position: absolute;
@@ -174,7 +189,7 @@ const InputWrapper = styled.div`
     cursor: pointer;
   }
 
-  ${breackpoints.md}{
+  ${breackpoints.md} {
     width: 20px;
     height: 20px;
   }

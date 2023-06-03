@@ -5,6 +5,7 @@ import { DefaultOptions } from '../../types/default.options'
 import Input from '../ui/Input'
 import Select from '../ui/Select'
 import { categories } from '../ui/settings'
+import AddFile from './AddFile'
 
 type SettingsType = {
   article: ArticleType
@@ -16,7 +17,9 @@ const Settings: React.FC<SettingsType> = ({ article, setArticle }) => {
 
   useEffect(() => {
     if (article.category) {
-      const cat = categories.find((item: DefaultOptions) => item.id === article.category)
+      const cat = categories.find(
+        (item: DefaultOptions) => item.id === article.category
+      )
       setCategory(cat || null)
     }
   }, [article])
@@ -42,6 +45,27 @@ const Settings: React.FC<SettingsType> = ({ article, setArticle }) => {
             setArticle({ ...article, title: text })
           }}
           label="Укажите заголовок"
+        />
+      </FormItem>
+
+      <FormItem>
+        <Input
+          value={article?.description || ''}
+          onChange={(text: string) => {
+            setArticle({ ...article, description: text })
+          }}
+          label="Краткое описание статьи"
+        />
+      </FormItem>
+
+      <FormItem>
+        <AddFile
+          label={'Обложка'}
+          type="image"
+          url={article?.image || ''}
+          onChange={(text: string) => {
+            setArticle({ ...article, image: text })
+          }}
         />
       </FormItem>
     </div>

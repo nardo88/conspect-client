@@ -9,6 +9,7 @@ import Burger from '../ui/Burger'
 import colors from '../ui/colors'
 import ArticleBody from './ArticleBody'
 import Category from './Category'
+import Catalog from '../catalog/Catalog'
 
 type Article = {
   id: string
@@ -21,7 +22,7 @@ type DataType = {
 }
 
 const Articles: React.FC = () => {
-  const params = useParams()
+  const { id } = useParams()
   const { logout } = useAuth() as any
   const ref = useRef<HTMLDivElement>(null)
   const [isLoading, setIsLoading] = useState(false)
@@ -41,21 +42,20 @@ const Articles: React.FC = () => {
         if (e?.response?.data?.message === 'Token expired') {
           logout()
         }
-        console.log(e)
       })
       .finally(() => setIsLoading(false))
   }, [logout])
 
   useEffect(() => {
-    if (params.id) {
+    if (id) {
       setIsLoading(true)
       api
-        .get(`/article/${params.id}`)
+        .get(`/article/${id}`)
         .then((response) => setArticle(response.data))
         .catch((e) => console.log(e))
         .finally(() => setIsLoading(false))
     }
-  }, [params])
+  }, [id])
 
   useEffect(() => {
     const clickHandler = (e: any) => {
@@ -94,10 +94,10 @@ const Articles: React.FC = () => {
           </NavListWrapper>
         </NavWrapper>
         <Content>
-          {article ? (
+          {id && article ? (
             <ArticleBody article={article} />
           ) : (
-            <div>Выберите статью</div>
+            <Catalog id={id} />
           )}
         </Content>
         {isLoading && <Loader />}

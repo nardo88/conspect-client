@@ -12,17 +12,20 @@ import Body from './Body'
 import Settings from './Settings'
 import { useNavigate } from 'react-router-dom'
 
+const defaultArticle = {
+  category: '',
+  title: '',
+  body: [],
+  description: '',
+}
+
 const Editor: React.FC = () => {
-  const defaultArticle = {
-    category: '',
-    title: '',
-    body: [],
-  }
   const navigate = useNavigate()
   const params = useParams()
   const [isOpen, setIsOpen] = useState(false)
   const [currentTab, setCurrentTab] = useState<string>('settings')
   const [article, setArticle] = useState<ArticleType>(defaultArticle)
+  console.log('article: ', article)
   const [isLoading, setIsLoading] = useState(false)
   const { userId } = useContext(AuthContext)
 
@@ -31,10 +34,8 @@ const Editor: React.FC = () => {
       setIsLoading(true)
       api
         .get(`/article/${params.id}`)
-        .then((response) => {
-          if (response.data) {
-            setArticle(response.data)
-          }
+        .then(({ data }) => {
+          setArticle(data)
         })
         .catch((e) => console.log(e))
         .finally(() => setIsLoading(false))
