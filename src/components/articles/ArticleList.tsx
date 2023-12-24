@@ -118,7 +118,7 @@ const ArticleList: React.FC = () => {
                   {dayjs(item.createdAt).format('DD.MM.YYYY')}
                 </div>
                 <div className="btn">
-                  <EditBtn onClick={() => navigate(`/editor/${item.id}`) } />
+                  <EditBtn onClick={() => navigate(`/editor/${item.id}`)} />
                 </div>
                 <div className="btn">
                   <RemoveBtn onClick={() => removeArticle(item.id)} />
@@ -253,5 +253,3 @@ const EditBtn = styled.button`
     height: 20px;
   }
 `
-
-

@@ -31,7 +31,6 @@ const Catalog = ({ id }: { id?: string }) => {
     api
       .get(`/article/catalog?page=${currentPage}&limit=${PAGECOUNT}`)
       .then(({ data }) => {
-        console.log('data: ', data)
         setData(data.data)
         setTotal(data.total)
       })

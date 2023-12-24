@@ -1,4 +1,4 @@
-export const categories = [
+const _categories = [
   { id: 'any', title: 'Разное' },
   { id: 'javaScript', title: 'JavaScript' },
   { id: 'typeScript', title: 'TypeScript' },
@@ -24,7 +24,12 @@ export const categories = [
   { id: 'womanUP', title: 'WomanUP' },
   { id: 'webpack', title: 'Webpack' },
   { id: 'vite', title: 'Vite' },
+  { id: 'browser-api', title: 'Browser APIs' },
 ]
+
+export const categories = _categories.sort((a, b) =>
+  a.title.localeCompare(b.title)
+)
 
 export const bodyVariants = [
   { id: 'text', title: 'Текст' },
