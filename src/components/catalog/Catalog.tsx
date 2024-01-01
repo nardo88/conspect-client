@@ -6,13 +6,14 @@ import api from '../../hooks/axios.hook'
 import ArticleCard from './ArticleCard'
 import { Text } from '../ui/components'
 import breackpoints from '../ui/breackpoints'
+import { Categories } from '../ui/settings'
 
 const PAGECOUNT = 12
 
 export interface IArticelCard {
   title: string
   description: string
-  category: string
+  category: Categories
   id: string
   image: string
   updatedAt: number

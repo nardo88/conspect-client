@@ -4,19 +4,20 @@ import styled from 'styled-components'
 import colors from '../ui/colors'
 import { Link } from 'react-router-dom'
 import { Text } from '../ui/components'
-import { categories } from '../ui/settings'
+import { categories, covers } from '../ui/settings'
 import dayjs from 'dayjs'
 
 const ArticleCard: FC<IArticelCard> = (props) => {
   const { category, description, id, image, title, updatedAt } = props
+  console.log('category: ', category)
   const cat = categories.find((i) => i.id === category)
   return (
     <CardWrapper>
       <Link to={`/${id}`}>
         <ImageWrapper>
-          {image ? (
-            <img src={image} alt="" />
-          ) : (
+          {covers[category] && <img src={covers[category]} alt="" />}
+          {!covers[category] && image && <img src={image} alt="" />}
+          {!covers[category] && !image && (
             <EmptyImage>
               <span>DatA</span>
               <span>forDeveloper</span>
