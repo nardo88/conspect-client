@@ -43,7 +43,6 @@ const SignIn = ({ login }: SignInPropsType) => {
         }
       })
       .catch((error) => {
-        console.log(error)
         if (error?.response?.data?.message) {
           setErrorMessage(error?.response?.data?.message)
           setIsError(true)

@@ -6,6 +6,7 @@ import MDEditor from '@uiw/react-md-editor'
 import colors from '../ui/colors'
 import breackpoints from '../ui/breackpoints'
 import { useRef } from 'react'
+import { CodeViewer } from './CodeViewer'
 
 type BodyOutputProps = {
   data: BodyItem[]
@@ -41,6 +42,12 @@ const BodyElem: React.FC<BodyItemProps> = ({ elem }) => {
         </TextWrapper>
       )}
 
+      {elem.type === 'code' && (
+        <TextWrapper>
+          <CodeViewer code={elem.value} />
+        </TextWrapper>
+      )}
+
       {elem.type === 'file' && (
         <TextWrapper>
           <a
@@ -64,7 +71,7 @@ const BodyElem: React.FC<BodyItemProps> = ({ elem }) => {
         <div ref={ref} className="mt15">
           <_Iframe
             src={elem.value}
-            frameBorder='0'
+            frameBorder="0"
             customHeight={(ref.current?.offsetTop || 0) + 85}
           />
         </div>
@@ -104,11 +111,11 @@ const Video = styled.video`
   width: 100%;
 `
 
-const _Iframe = styled.iframe<{customHeight: number}>`
+const _Iframe = styled.iframe<{ customHeight: number }>`
   width: calc(100% + 40px);
   margin-left: -20px;
   margin-right: -20px;
-  height: calc(100vh - ${({customHeight}) => customHeight + 'px'});
+  height: calc(100vh - ${({ customHeight }) => customHeight + 'px'});
 
   &::-webkit-scrollbar-track {
     border-radius: 10px;
@@ -123,5 +130,4 @@ const _Iframe = styled.iframe<{customHeight: number}>`
     border-radius: 10px;
     background-color: ${colors.lightBrown};
   }
-
 `

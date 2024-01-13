@@ -30,16 +30,16 @@ const Roles = () => {
         seTotal(res.data.total)
       })
       .catch((error: Error) => {
-        console.log(error)
+        alert(error)
       })
       .finally(() => {
         setIsLoading(false)
       })
   }
 
-  const changeRole = useCallback(async (id:string, value: boolean) => {
+  const changeRole = useCallback(async (id: string, value: boolean) => {
     api.put(`/user/${id}`, {
-        roles: value ? ['user', 'admin'] : ['user']
+      roles: value ? ['user', 'admin'] : ['user'],
     })
   }, [])
 
@@ -60,21 +60,21 @@ const Roles = () => {
               <li>
                 <Text color={colors.grey}>Дата регистрации</Text>
               </li>
-              <li className='tac'>
+              <li className="tac">
                 <Text color={colors.grey}>Права администратора</Text>
               </li>
-              <li>
-              </li>
-              <li>
-              </li>
+              <li></li>
+              <li></li>
             </ul>
           </Titles>
           <DataWrapper>
-              {data.length > 0 ? (
-                data.map((user: User) => <UserItem key={user.id} {...user} changeRole={changeRole}/>)
-              ) : (
-                <Text>Нет данных для отображения</Text>
-              )}
+            {data.length > 0 ? (
+              data.map((user: User) => (
+                <UserItem key={user.id} {...user} changeRole={changeRole} />
+              ))
+            ) : (
+              <Text>Нет данных для отображения</Text>
+            )}
           </DataWrapper>
         </div>
         <div className="mt20">
@@ -114,12 +114,11 @@ const Titles = styled.div`
     list-style-type: none;
 
     li {
-        width: 25%;
+      width: 25%;
     }
   }
 `
 
 const DataWrapper = styled.div`
   padding: 15px 0;
-
 `

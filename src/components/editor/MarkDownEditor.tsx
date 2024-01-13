@@ -3,10 +3,11 @@ import styled from 'styled-components'
 import colors from '../ui/colors'
 import { RemoveBtn } from '../ui/components'
 import { variantsTranslate } from '../ui/settings'
+import { ArticleEnum } from '../../types/articles'
 
 type MerkDownPRops = {
   value: string
-  type: 'text' | 'image' | 'markdown' | 'video' | 'file'
+  type: ArticleEnum
   onChange: (text: string) => void
   remove: () => void
 }

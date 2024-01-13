@@ -6,9 +6,10 @@ import { useEffect, useState } from 'react'
 import useFirebase from '../../hooks/firebase.hook'
 import { RemoveBtn } from '../ui/components'
 import breackpoints from '../ui/breackpoints'
+import { ArticleEnum } from '../../types/articles'
 
 type PropsType = {
-  type: 'text' | 'image' | 'markdown' | 'video' | 'file' | 'frame'
+  type: ArticleEnum
   onChange: (value: string) => void
   remove?: () => void
   url: string

@@ -51,7 +51,7 @@ const ArticleList: React.FC = () => {
         seTotal(res.data.total)
       })
       .catch((error: Error) => {
-        console.log(error)
+        alert(error)
       })
       .finally(() => {
         setIsLoading(false)

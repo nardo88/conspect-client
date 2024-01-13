@@ -7,9 +7,10 @@ import styled from 'styled-components'
 import colors from '../ui/colors'
 import { variantsTranslate } from '../ui/settings'
 import { RemoveBtn } from '../ui/components'
+import { ArticleEnum } from '../../types/articles'
 
 type EditorProps = {
-  type?: 'text' | 'image' | 'markdown' | 'video' | 'file' | 'frame'
+  type?: ArticleEnum
   value: string
   label?: string
   onChange: (value: string) => void

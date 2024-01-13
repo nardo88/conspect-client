@@ -5,6 +5,7 @@ export type ArticleEnum =
   | 'video'
   | 'file'
   | 'frame'
+  | 'code'
 
 export type BodyItem = {
   type: ArticleEnum

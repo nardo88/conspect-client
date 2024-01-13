@@ -7,6 +7,7 @@ import AddFile from './AddFile'
 import Frame from './Frame'
 import DndElement from '../ui/DndElement'
 import { useState } from 'react'
+import { CodeEditor } from './CodeEditor'
 
 type BodyInputProps = {
   data: ArticleType
@@ -46,6 +47,19 @@ const BodyInput: React.FC<BodyInputProps> = ({ data, setData }) => {
           </div>
           {item.type === 'markdown' && (
             <MarkDownEditor
+              type={item.type}
+              value={item.value}
+              remove={deleteItem(i)}
+              onChange={(text: string) => {
+                const newItem = { type: item.type, value: text }
+                const newBody = [...data.body]
+                newBody[i] = newItem
+                setData({ ...data, body: newBody })
+              }}
+            />
+          )}
+          {item.type === 'code' && (
+            <CodeEditor
               type={item.type}
               value={item.value}
               remove={deleteItem(i)}

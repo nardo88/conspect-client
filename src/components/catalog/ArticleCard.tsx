@@ -9,7 +9,6 @@ import dayjs from 'dayjs'
 
 const ArticleCard: FC<IArticelCard> = (props) => {
   const { category, description, id, image, title, updatedAt } = props
-  console.log('category: ', category)
   const cat = categories.find((i) => i.id === category)
   return (
     <CardWrapper>

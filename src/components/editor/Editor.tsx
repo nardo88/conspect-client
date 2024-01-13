@@ -25,7 +25,6 @@ const Editor: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [currentTab, setCurrentTab] = useState<string>('settings')
   const [article, setArticle] = useState<ArticleType>(defaultArticle)
-  console.log('article: ', article)
   const [isLoading, setIsLoading] = useState(false)
   const { userId } = useContext(AuthContext)
 
@@ -37,7 +36,7 @@ const Editor: React.FC = () => {
         .then(({ data }) => {
           setArticle(data)
         })
-        .catch((e) => console.log(e))
+        .catch((e) => alert(e))
         .finally(() => setIsLoading(false))
     }
   }, [params])
@@ -64,7 +63,7 @@ const Editor: React.FC = () => {
         }
       })
       .catch((error: Error) => {
-        console.log(error)
+        alert(error)
       })
       .finally(() => setIsLoading(false))
   }
@@ -90,7 +89,7 @@ const Editor: React.FC = () => {
         }
       })
       .catch((error: Error) => {
-        console.log(error)
+        alert(error)
       })
       .finally(() => setIsLoading(false))
   }

@@ -52,7 +52,7 @@ const Articles: React.FC = () => {
       api
         .get(`/article/${id}`)
         .then((response) => setArticle(response.data))
-        .catch((e) => console.log(e))
+        .catch((e) => alert(e))
         .finally(() => setIsLoading(false))
     }
   }, [id])

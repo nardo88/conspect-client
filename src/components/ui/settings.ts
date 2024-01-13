@@ -87,6 +87,7 @@ export const bodyVariants = [
   { id: 'video', title: 'Видео' },
   { id: 'file', title: 'Файл' },
   { id: 'frame', title: 'Фрейм' },
+  { id: 'code', title: 'Код' },
 ]
 
 export const variantsTranslate = {
@@ -96,6 +97,7 @@ export const variantsTranslate = {
   video: 'Видео',
   file: 'Файл',
   frame: 'Фрейм',
+  code: 'Код',
 }
 
 export const covers: Partial<Record<Categories, string>> = {
