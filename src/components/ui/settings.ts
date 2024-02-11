@@ -40,6 +40,7 @@ export enum Categories {
   webpack = 'webpack',
   vite = 'vite',
   browserApi = 'browserApi',
+  webRtc = 'webRtc',
 }
 
 interface ICategory {
@@ -74,6 +75,7 @@ const _categories: ICategory[] = [
   { id: Categories.webpack, title: 'Webpack' },
   { id: Categories.vite, title: 'Vite' },
   { id: Categories.browserApi, title: 'Browser APIs' },
+  { id: Categories.webRtc, title: 'Web RTC' },
 ]
 
 export const categories = _categories.sort((a, b) =>
