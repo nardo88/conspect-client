@@ -12,6 +12,7 @@ import webpack from '../../assets/images/webpack.jpg'
 import css from '../../assets/images/css.jpg'
 import postgreSQL from '../../assets/images/postgreSQL.jpg'
 import fireBase from '../../assets/images/fireBase.png'
+import webRtc from '../../assets/images/WEBRTC.png'
 
 export enum Categories {
   any = 'any',
@@ -117,4 +118,5 @@ export const covers: Partial<Record<Categories, string>> = {
   css,
   postgreSQL,
   fireBase,
+  webRtc,
 }
